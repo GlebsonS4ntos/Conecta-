@@ -1,0 +1,85 @@
+<br><br><br><br>
+<div class="container" style="display: flex; justify-content: end;">
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Adicionar <i class="bi bi-plus-lg"></i></button>
+</div>
+<br><br><br>
+<div class="container">
+  <!--Compo de Pesquisa-->
+  <div class="cabecaTabela input-group mb-2">
+    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+    <input class="form-control"  type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+    <!--[(ngModel)]="filtrolista"-->
+  </div>
+  <hr>
+  <!--Tabela de Exibicao-->
+  <table class="table" *ngIf="materias">
+    <thead>
+      <tr>
+        <th scope="col">N.Materia</th>
+        <th scope="col">Nome</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="materias && materiasFiltrados.length">
+      <tr *ngFor="let materia of materiasFiltrados; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ materia.nome }}</td>
+        <td style="display: flex">
+          <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(materia.materiaId)" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materia.materiaId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir" ><i class="bi bi-pencil-square"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="materiasFiltrados.length == 0">
+      <tr>
+        <td colspan="8">
+            <h4>Sem Registros</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!--Modal Para inserir e atualizar-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ tituloFormulario }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
+          <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">Nome: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="nome" required>
+          </div>
+          <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="!formulario.valid">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!--Modal de confirmação de delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Você realmente deseja deletar ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="ExcluirMateria(idDeletar)">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

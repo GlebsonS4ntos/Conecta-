@@ -1,0 +1,185 @@
+<br><br><br><br>
+<div class="container" style="display: flex; justify-content: end;">
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal"data-bs-target="#modalAtualizarEInserir">Adicionar <i class="bi bi-plus-lg"></i></button>
+</div>
+<br><br><br>
+<div class="container">
+  <div class="cabecaTabela input-group mb-2">
+    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+    <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+  </div>
+  <hr>
+  <!--Tabela-->
+  <div style="overflow: auto;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">N.Aluno</th>
+          <th scope="col">Foto</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">DataNasc</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Email</th>
+          <th scope="col">Senha</th>
+
+        </tr>
+      </thead>
+      <tbody *ngIf="alunos && alunosFiltrados.length">
+        <tr *ngFor="let aluno of alunosFiltrados; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{aluno.foto}}</td>
+          <td>{{ aluno.nome }}</td>
+          <td>{{aluno.cpf}}</td>
+          <td>{{aluno.cep}}</td>
+          <td>{{aluno.endereco}}</td>
+          <td>{{aluno.bairro}}</td>
+          <td>{{aluno.cidade}}</td>
+          <td>{{aluno.dataNasc}}</td>
+          <td>{{ aluno.telefone }}</td>
+          <td>{{ aluno.email }}</td>
+          <td>{{ aluno.senha }}</td>
+
+          <td style="display: flex">
+            <button type="button" class="btn btn-outline-danger me-2"(click)="alterarIdDeletar(aluno.alunoId)"  data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-outline-info"(click)="ExibirModalAtualizacao(aluno.alunoId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir"><i class="bi bi-pencil-square"></i></button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="alunosFiltrados.length == 0">
+        <tr>
+          <td colspan="8">
+              <h4>Sem Registros</h4>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!--Modal de Criação e Atualização-->
+<div class="modal fade" id="modalAtualizarEInserir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ tituloFormulario }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ms-2">
+        <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
+          <div class="row g-2 mb-3">
+            <div class="form-group col-md">
+              <label class="formTexto">Foto: *</label>
+              <input type="text" class="fomr-control form-control-sm" formControlName="foto" required />
+            </div>
+            <div *ngIf="formulario.get('foto')?.errors?.['required'] && formulario.get('foto')?.touched">
+              <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+             </div>
+            <div class="form-group col-md">
+              <label class="formTexto">Nome: *</label>
+              <input type="text" class="fomr-control form-control-sm" formControlName="nome" required />
+            </div>
+          </div>
+          <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+            <div class="row g-2 mb-3">
+            <div class="form-group col-md ">
+              <label class="formTexto">CPF: *</label>
+              <input type="text" class="fomr-control form-control-sm" onblur="javascript: validarCPF(this.value);" maxlength="14" formControlName="cpf" required />
+            </div>
+            <div *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched">
+              <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+             </div>
+          <div class="form-group col-md">
+            <label class="formTexto">Cep: *</label>
+            <input type="text" class="fomr-control form-control-sm" onblur="javascript: validarCEP(this.value);" maxlength="10" formControlName="cep" required />
+          </div>
+        </div>
+        <div *ngIf="formulario.get('cep')?.errors?.['required'] && formulario.get('cep')?.touched">
+          <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+         </div>
+        <div class="row g-2 mb-3">
+          <div class="form-group col-md">
+            <label class="formTexto">Endereco: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="endereco" required />
+          </div>
+          <div *ngIf="formulario.get('endereco')?.errors?.['required'] && formulario.get('endereco')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+          <div class="form-group col-md">
+            <label class="formTexto">Bairro: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="bairro" required />
+          </div>
+        </div>
+        <div *ngIf="formulario.get('bairro')?.errors?.['required'] && formulario.get('bairro')?.touched">
+          <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+         </div>
+        <div class="row g-2 mb-3">
+          <div class="form-group col-md">
+            <label class="formTexto">Cidade: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="cidade" required />
+          </div>
+          <div *ngIf="formulario.get('cidade')?.errors?.['required'] && formulario.get('cidade')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+          <div class="form-group col-md">
+            <label class="formTexto">DataNasc: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="dataNasc" required />
+          </div>
+        </div>
+        <div *ngIf="formulario.get('dataNasc')?.errors?.['required'] && formulario.get('dataNasc')?.touched">
+          <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+         </div>
+          <div class="row g-2 mb-3">
+            <div class="form-group col-md">
+              <label class="formTexto">Telefone: *</label>
+              <input type="text" class="fomr-control form-control-sm" formControlName="telefone" required />
+            </div>
+            <div *ngIf="formulario.get('telefone')?.errors?.['required'] && formulario.get('telefone')?.touched">
+              <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+             </div>
+            <div class="form-group col-md">
+              <label class="formTexto">Email: *</label>
+              <input type="email" class="fomr-control form-control-sm" formControlName="email" required />
+            </div>
+          </div>
+          <div *ngIf="formulario.get('email')?.errors?.['required'] && formulario.get('email')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+          <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">Senha: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="senha" required/>
+          </div>
+          <div *ngIf="formulario.get('senha')?.errors?.['required'] && formulario.get('senha')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal de confirmação de delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Você realmente deseja deletar ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="ExcluirAluno(idDeletar)">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>
+

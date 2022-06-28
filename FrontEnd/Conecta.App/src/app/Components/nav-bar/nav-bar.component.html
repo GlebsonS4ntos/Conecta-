@@ -1,0 +1,69 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap');
+</style>
+<nav class="navbar shadow navbar-dark cornavbar fixed-top" *ngIf="navbarVisible">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+      aria-controls="offcanvasExample">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="" style="text-decoration: none; color: rgb(220, 221, 223); font-size: 30px; font-family: 'Ubuntu', sans-serif;">
+      Conecta+
+    </a>
+    <a href="">
+      <img [src]="LogoPath" class="Logo">
+    </a>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-light" tabindex="-1" id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a class="nav-link link-dark"  routerLink="" data-bs-dismiss="offcanvas">
+        <i class="bi bi-house-door-fill me-2"></i>
+        Pagina Inicial
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/QuemSomos" data-bs-dismiss="offcanvas">
+        <i class="bi bi-info-circle me-2"></i>
+        Quem Somos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/Duvidas" data-bs-dismiss="offcanvas">
+        <i class="bi bi-question-circle me-2"></i>
+        Duvidas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/Aluno" data-bs-dismiss="offcanvas">
+        <i class="bi bi-person-video me-2"></i>
+        Alunos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/Professor" data-bs-dismiss="offcanvas">
+        <i class="bi bi-mortarboard me-2"></i>
+        Professores
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/Turmas" data-bs-dismiss="offcanvas">
+        <i class="bi bi-card-checklist me-2"></i>
+        Turmas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/Materia" data-bs-dismiss="offcanvas">
+        <i class="bi bi-book me-2"></i>
+        Materias
+      </a>
+    </li>
+  </ul>
+  <a routerLink="/Login" type="button" class="btn btn-outline-success" data-bs-dismiss="offcanvas" (click)="alterarVisibilidadeNavbar()">
+    Sou ConectaLover <i class="bi bi-heart"></i>
+  </a>
+</div>
+<router-outlet></router-outlet>

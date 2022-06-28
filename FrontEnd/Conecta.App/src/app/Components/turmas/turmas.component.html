@@ -1,0 +1,90 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container" style="display: flex; justify-content: end;">
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal"
+    data-bs-target="#modalAtualizarEInserir">
+    Adicionar <i class="bi bi-plus-lg"></i></button>
+</div>
+<br><br><br>
+<div class="container">
+  <div class="cabecaTabela input-group mb-2">
+    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+    <input class="form-control" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="search">
+  </div>
+  <hr />
+  <!--Tabela-->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Codigo da Turma</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="turmas && turmas.length">
+      <tr *ngFor="let t of turmasFiltradas; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ t.codigoTurma }}</td>
+        <td style="display: flex">
+          <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(t.turmaId)"
+            data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash3"></i></button>
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(t.turmaId)"
+            data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir"><i class="bi bi-pencil-square"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="turmasFiltradas.length == 0">
+      <tr>
+        <td colspan="8">
+          <h4>Sem Registros</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- Modael Adicionar e Editar-->
+<div class="modal fade" id="modalAtualizarEInserir" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ tituloFormulario }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
+          <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">Codigo: *</label>
+            <input type="text" class="fomr-control form-control-sm" formControlName="codigoTurma" required>
+          </div>
+          <div *ngIf="formulario.get('codigoTurma')?.errors?.['required'] && formulario.get('codigoTurma')?.touched">
+            <p style="color: red; font-size: 10px;">Codigo Não digitado</p>
+           </div>
+          <div class=" modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de confirmação de delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Você realmente deseja deletar ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+          (click)="ExcluirTurma(idDeletar)">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>
