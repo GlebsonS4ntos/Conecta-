@@ -7,7 +7,7 @@ namespace Conecta.API.Models
     public class Nota
     {
         public int NotaId { get; set; }
-        [ForeignKey("AlunoId")]
+        public int AlunoId { get; set; }
         public Aluno Aluno { get; set; }
         public decimal Bimestre1 { get; set; }
         public decimal Bimestre2 { get; set; }
@@ -15,5 +15,6 @@ namespace Conecta.API.Models
         public decimal Bimestre4 { get; set; }
         public DateTime Ano { get; set; }
         public ICollection<MateriaProfessorTurma> MateriaProfessorTurmas { get; set; }
+        public ICollection<NotaDetalhe> NotaDetalhes { get; set; }
     }
 }

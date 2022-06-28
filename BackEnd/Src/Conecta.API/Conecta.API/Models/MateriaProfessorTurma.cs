@@ -6,11 +6,11 @@ namespace Conecta.API.Models
     public class MateriaProfessorTurma
     {
         public int MateriaProfessorTurmaId { get; set; }
-        [ForeignKey("TurmaId")]
+        public int TurmaId { get; set; }
         public Turma Turma { get; set; }
-        [ForeignKey("MateriaId")]
+        public int MateriaId { get; set; }
         public Materia Materia { get; set; }
-        [ForeignKey("ProfessorId")]
+        public int ProfessorId { get; set; }
         public Professor Professor { get; set; }
         public ICollection<Nota> Notas { get; set; }
     }

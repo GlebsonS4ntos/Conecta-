@@ -23,6 +23,8 @@ import { ProfessorComponent } from './Components/professor/professor.component';
 import { ProfessorService } from './Components/professor/professor.service';
 import { AlunoComponent } from './Components/aluno/aluno.component';
 import { AlunoService } from './Components/aluno/aluno.service';
+import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
+import { MateriaProfessorTurmaService } from './Components/materia-professor-turma/materia-professor-turma.service';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { AlunoService } from './Components/aluno/aluno.service';
     TurmasComponent,
     MateriaComponent,
     ProfessorComponent,
-    AlunoComponent
+    AlunoComponent,
+    MateriaProfessorTurmaComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { AlunoService } from './Components/aluno/aluno.service';
       }
     )
   ],
-  providers: [HttpClientModule, TurmasService, MateriaService, ProfessorService, AlunoService],
+  providers: [HttpClientModule, TurmasService, MateriaService, ProfessorService, AlunoService, MateriaProfessorTurmaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

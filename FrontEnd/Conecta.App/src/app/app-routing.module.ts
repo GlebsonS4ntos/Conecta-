@@ -9,6 +9,7 @@ import { DuvidasComponent } from './Components/duvidas/duvidas.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { LoginComponent } from './Components/login/login.component';
 import { QuemSomosComponent } from './Components/quem-somos/quem-somos.component';
+import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
 
 const routes: Routes = [
   {path: '', component:HomePageComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'Materia', component:MateriaComponent},
   {path: 'Professor', component:ProfessorComponent},
   {path: 'Aluno', component:AlunoComponent},
-  {path: 'NavBar', component:NavBarComponent}
+  {path: 'NavBar', component:NavBarComponent},
+  {path: 'MateriaProfessorTurmas', component:MateriaProfessorTurmaComponent}
 ];
 
 @NgModule({

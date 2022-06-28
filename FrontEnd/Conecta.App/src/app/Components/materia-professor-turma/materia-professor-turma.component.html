@@ -1,0 +1,99 @@
+<br><br><br><br>
+<div class="container" style="display: flex; justify-content: end;">
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Adicionar <i class="bi bi-plus-lg"></i></button>
+</div>
+<br><br><br>
+<div class="container">
+
+  <!--Tabela de Exibicao-->
+  <table class="table" *ngIf="materiaProfessorTurmas">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">MateriaId</th>
+        <th scope="col">TurmaId</th>
+        <th scope="col">ProfessorId</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="materiaProfessorTurmas && materiaProfessorTurmasFiltrados.length">
+      <tr *ngFor="let materiaProfessorTurma of materiaProfessorTurmasFiltrados; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ materiaProfessorTurma.materiaId }}</td>
+        <td>{{ materiaProfessorTurma.turmaId }}</td>
+        <td>{{ materiaProfessorTurma.professorId }}</td>
+        <td style="display: flex">
+          <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir" ><i class="bi bi-pencil-square"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="materiaProfessorTurmasFiltrados.length == 0">
+      <tr>
+        <td colspan="8">
+            <h4>Sem Registros</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!--Modal Para inserir e atualizar-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ tituloFormulario }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
+          <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">MateriaId: *</label>
+            <input type="number" class="fomr-control form-control-sm" formControlName="materiaId" required>
+          </div>
+          <div *ngIf="formulario.get('materiaId')?.errors?.['required'] && formulario.get('materiaId')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+           <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">TurmaId: *</label>
+            <input type="number" class="fomr-control form-control-sm" formControlName="turmaId" required>
+          </div>
+          <div *ngIf="formulario.get('turmaId')?.errors?.['required'] && formulario.get('turmaId')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+           <div class="form-group col-md-2 mb-3">
+            <label class="formTexto">ProfessorId:*</label>
+            <input type="number" class="fomr-control form-control-sm" formControlName="professorId" required>
+          </div>
+          <div *ngIf="formulario.get('professorId')?.errors?.['required'] && formulario.get('professorId')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
+           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="!formulario.valid">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!--Modal de confirmação de delete-->
+<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Você realmente deseja deletar ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="ExcluirMateriaProfessorTurma(idDeletar)">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
