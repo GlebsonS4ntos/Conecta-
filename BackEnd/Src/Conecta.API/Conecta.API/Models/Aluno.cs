@@ -28,7 +28,7 @@ namespace Conecta.API.Models
         [StringLength(10)]
         public string Senha { get; set; }
         public string Foto { get; set; }
-        [ForeignKey("TurmaId")]
+        public int TurmaId { get; set; }
         public Turma Turma { get; set; }
         public ICollection<Nota> Notas { get; set; }
     }

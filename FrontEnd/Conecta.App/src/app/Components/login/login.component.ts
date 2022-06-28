@@ -6,15 +6,16 @@ import { AdmService } from './../shared/adm.service';
 import { AlunoService } from './../aluno/aluno.service';
 import { ProfessorService } from './../professor/professor.service';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
 import { Adm } from '../shared/Adm';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.css'],
 })
+
 export class LoginComponent implements OnInit {
   alunosLista: Aluno[];
   professorLista: Professor[];

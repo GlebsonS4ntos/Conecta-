@@ -5,11 +5,11 @@ namespace Conecta.API.Models
 {
     public class NotaDetalhe
     {
-        [Key]
+        
         public int NotaDetalheId { get; set; }
-        [ForeignKey("MateriaProfessorTurmaId")]
+        public int? MateriaProfessorTurmaId { get; set; }
         public MateriaProfessorTurma MateriaProfessorTurma{ get; set; }
-        [ForeignKey("NotaId")]
+        public int? NotaId { get; set; }
         public Nota Nota { get; set; }
     }
 }

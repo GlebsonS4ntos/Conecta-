@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conecta.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220627123045_inicial")]
+    [Migration("20220628172015_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,7 +88,7 @@ namespace Conecta.API.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int?>("TurmaId")
+                    b.Property<int>("TurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("AlunoId");
@@ -121,13 +121,13 @@ namespace Conecta.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MateriaId")
+                    b.Property<int>("MateriaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProfessorId")
+                    b.Property<int>("ProfessorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TurmaId")
+                    b.Property<int>("TurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("MateriaProfessorTurmaId");
@@ -148,7 +148,7 @@ namespace Conecta.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AlunoId")
+                    b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Ano")
@@ -234,9 +234,9 @@ namespace Conecta.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoTurma")
+                    b.Property<int>("CodigoTurma")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("int");
 
                     b.HasKey("TurmaId");
 
@@ -307,7 +307,9 @@ namespace Conecta.API.Migrations
                 {
                     b.HasOne("Conecta.API.Models.Turma", "Turma")
                         .WithMany()
-                        .HasForeignKey("TurmaId");
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Turma");
                 });
@@ -316,15 +318,21 @@ namespace Conecta.API.Migrations
                 {
                     b.HasOne("Conecta.API.Models.Materia", "Materia")
                         .WithMany()
-                        .HasForeignKey("MateriaId");
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Conecta.API.Models.Professor", "Professor")
                         .WithMany()
-                        .HasForeignKey("ProfessorId");
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Conecta.API.Models.Turma", "Turma")
                         .WithMany()
-                        .HasForeignKey("TurmaId");
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Materia");
 
@@ -337,7 +345,9 @@ namespace Conecta.API.Migrations
                 {
                     b.HasOne("Conecta.API.Models.Aluno", "Aluno")
                         .WithMany("Notas")
-                        .HasForeignKey("AlunoId");
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Aluno");
                 });
@@ -349,7 +359,7 @@ namespace Conecta.API.Migrations
                         .HasForeignKey("MateriaProfessorTurmaId");
 
                     b.HasOne("Conecta.API.Models.Nota", "Nota")
-                        .WithMany()
+                        .WithMany("NotaDetalhes")
                         .HasForeignKey("NotaId");
 
                     b.Navigation("MateriaProfessorTurma");
@@ -420,6 +430,11 @@ namespace Conecta.API.Migrations
             modelBuilder.Entity("Conecta.API.Models.Aluno", b =>
                 {
                     b.Navigation("Notas");
+                });
+
+            modelBuilder.Entity("Conecta.API.Models.Nota", b =>
+                {
+                    b.Navigation("NotaDetalhes");
                 });
 #pragma warning restore 612, 618
         }

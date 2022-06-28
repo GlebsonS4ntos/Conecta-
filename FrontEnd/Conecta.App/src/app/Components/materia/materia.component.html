@@ -55,6 +55,7 @@
             <input type="text" class="fomr-control form-control-sm" formControlName="nome" required>
           </div>
           <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
+            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
            </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
