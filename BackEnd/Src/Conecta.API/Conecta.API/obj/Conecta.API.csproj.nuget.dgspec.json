@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vivia\\OneDrive\\Área de Trabalho\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj": {}
+    "C:\\Users\\glebs\\Desktop\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vivia\\OneDrive\\Área de Trabalho\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj": {
+    "C:\\Users\\glebs\\Desktop\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vivia\\OneDrive\\Área de Trabalho\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj",
+        "projectUniqueName": "C:\\Users\\glebs\\Desktop\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj",
         "projectName": "Conecta.API",
-        "projectPath": "C:\\Users\\vivia\\OneDrive\\Área de Trabalho\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj",
-        "packagesPath": "C:\\Users\\vivia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vivia\\OneDrive\\Área de Trabalho\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\obj\\",
+        "projectPath": "C:\\Users\\glebs\\Desktop\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\Conecta.API.csproj",
+        "packagesPath": "C:\\Users\\glebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\glebs\\Desktop\\Projeto\\BackEnd\\Src\\Conecta.API\\Conecta.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vivia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\glebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

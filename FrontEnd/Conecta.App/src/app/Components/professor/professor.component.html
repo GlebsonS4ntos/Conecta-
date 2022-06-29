@@ -1,6 +1,7 @@
 <br><br><br><br>
 <div class="container" style="display: flex; justify-content: end;">
-  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal"data-bs-target="#modalAtualizarEInserir">Adicionar <i class="bi bi-plus-lg"></i></button>
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal"
+    data-bs-target="#modalAtualizarEInserir">Adicionar <i class="bi bi-plus-lg"></i></button>
 </div>
 <br><br><br>
 <div class="container">
@@ -31,15 +32,18 @@
           <td>{{ professor.email }}</td>
           <td>{{ professor.senha }}</td>
           <td style="display: flex">
-            <button type="button" class="btn btn-outline-danger me-2"(click)="alterarIdDeletar(professor.professorId)"  data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
-            <button type="button" class="btn btn-outline-info"(click)="ExibirModalAtualizacao(professor.professorId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(professor.professorId)"
+              data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
+            <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(professor.professorId)"
+              data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir"><i
+                class="bi bi-pencil-square"></i></button>
           </td>
         </tr>
       </tbody>
       <tfoot *ngIf="professoresFiltrados.length == 0">
         <tr>
           <td colspan="8">
-              <h4>Sem Registros</h4>
+            <h4>Sem Registros</h4>
           </td>
         </tr>
       </tfoot>
@@ -48,7 +52,8 @@
 </div>
 
 <!--Modal de Criação e Atualização-->
-<div class="modal fade" id="modalAtualizarEInserir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAtualizarEInserir" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,48 +62,45 @@
       </div>
       <div class="modal-body ms-2">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
-          <div class="row g-2 mb-3">
-            <div class="form-group col-md">
-              <label class="formTexto">Nome: *</label>
-              <input type="text" class="fomr-control form-control-sm" formControlName="nome" required />
-            </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nome:*</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" required formControlName="nome">
             <div *ngIf="propriedade.nome.touched && propriedade.nome.invalid">
-              <label style="color: red;">* Campo Obrigatorio!</label>
-            </div>
-            <div class="form-group col-md ">
-              <label class="formTexto">CPF: *</label>
-              <input type="text" class="fomr-control form-control-sm" formControlName="cpf" required />
+              <label style="color: red;">Campo Obrigatorio! Contendo mais de 5 Caracteres</label>
             </div>
           </div>
-          <div *ngIf="propriedade.cpf.touched && propriedade.cpf.invalid">
-            <label style="color: red;">* Campo Obrigatorio!</label>
-          </div>
-          <div class="row g-2 mb-3">
-            <div class="form-group col-md">
-              <label class="formTexto">Telefone: *</label>
-              <input type="text" class="fomr-control form-control-sm" formControlName="telefone" required />
+          <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">CPF:* (Apenas Numeros)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" formControlName="cpf" required />
+            <div *ngIf="propriedade.cpf.touched && propriedade.cpf.invalid">
+              <label style="color: red;">* Digite um CPF existente! </label>
             </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label">Telefone:* (Com DDD)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput3" formControlName="telefone" required />
             <div *ngIf="propriedade.telefone.touched && propriedade.telefone.invalid">
               <label style="color: red;">* Campo Obrigatorio!</label>
             </div>
-            <div class="form-group col-md">
-              <label class="formTexto">Email: *</label>
-              <input type="email" class="fomr-control form-control-sm" formControlName="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput4" class="form-label">Email:*</label>
+            <input type="email" class="form-control" id="exampleFormControlInput4"  formControlName="email" required />
+            <div *ngIf="propriedade.email.touched && propriedade.email.invalid">
+              <label style="color: red;">* Email Invalido!</label>
             </div>
           </div>
-          <div *ngIf="propriedade.email.touched && propriedade.email.invalid">
-            <label style="color: red;">* Campo Obrigatorio!</label>
-          </div>
-          <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">Senha: *</label>
-            <input type="text" class="fomr-control form-control-sm" formControlName="senha" required/>
-          </div>
-          <div *ngIf="propriedade.senha.touched && propriedade.senha.invalid">
-            <label style="color: red;">* Campo Obrigatorio!</label>
+          <div class="mb-3">
+            <label for="exampleFormControlInput5" class="form-label">Senha:*</label>
+            <input type="text" class="form-control" id="exampleFormControlInput5" formControlName="senha" required />
+            <div *ngIf="propriedade.senha.touched && propriedade.senha.invalid">
+              <label style="color: red;">* Campo Obrigatorio! De 6 a 10 Caracteres</label>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+              [disabled]="formulario.invalid">Salvar</button>
           </div>
         </form>
       </div>
@@ -116,7 +118,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="ExcluirProfessor(idDeletar)">Sim</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+          (click)="ExcluirProfessor(idDeletar)">Sim</button>
       </div>
     </div>
   </div>
