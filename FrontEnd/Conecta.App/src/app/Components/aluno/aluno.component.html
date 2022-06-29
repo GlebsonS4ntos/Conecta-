@@ -81,56 +81,86 @@
               <label class="formTexto">Nome: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="nome" required />
             </div>
+            <div *ngIf="propriedade.nome.touched && propriedade.nome.invalid">
+              <label style="color: red;">* Campo Obrigatorio!</label>
+            </div>
             <div class="form-group col-md ">
               <label class="formTexto">CPF: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="cpf" required />
             </div>
+          </div>
+          <div *ngIf="propriedade.cpf.touched && propriedade.cpf.invalid">
+            <label style="color: red;">* Campo Obrigatorio!</label>
           </div>
           <div class="row g-2 mb-3">
             <div class="form-group col-md">
               <label class="formTexto">Cep: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="cep" required />
             </div>
+            <div *ngIf="propriedade.cep.touched && propriedade.cep.invalid">
+              <label style="color: red;">* Campo Obrigatorio!</label>
+            </div>
             <div class="form-group col-md">
               <label class="formTexto">Endereco: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="endereco" required />
             </div>
+          </div>
+          <div *ngIf="propriedade.endereco.touched && propriedade.endereco.invalid">
+            <label style="color: red;">* Campo Obrigatorio!</label>
           </div>
           <div class="row g-2 mb-3">
             <div class="form-group col-md">
               <label class="formTexto">Bairro: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="bairro" required />
             </div>
+            <div *ngIf="propriedade.bairro.touched && propriedade.bairro.invalid">
+              <label style="color: red;">* Campo Obrigatorio!</label>
+            </div>
             <div class="form-group col-md">
               <label class="formTexto">Cidade: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="cidade" required />
             </div>
+          </div>
+          <div *ngIf="propriedade.cidade.touched && propriedade.cidade.invalid">
+            <label style="color: red;">* Campo Obrigatorio!</label>
           </div>
           <div class="row g-2 mb-3">
             <div class="form-group col-md">
               <label class="formTexto">DataNasc: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="dataNasc" required />
             </div>
+            <div *ngIf="propriedade.dataNasc.touched && propriedade.dataNasc.invalid">
+              <label style="color: red;">* Campo Obrigatorio!</label>
+            </div>
             <div class="form-group col-md">
               <label class="formTexto">Telefone: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="telefone" required />
             </div>
+          </div>
+          <div *ngIf="propriedade.telefone.touched && propriedade.telefone.invalid">
+            <label style="color: red;">* Campo Obrigatorio!</label>
           </div>
           <div class="row g-2 mb-3">
             <div class="form-group col-md">
               <label class="formTexto">Email: *</label>
               <input type="email" class="fomr-control form-control-sm" formControlName="email" required />
             </div>
+            <div *ngIf="propriedade.email.touched && propriedade.email.invalid">
+              <label style="color: red;">* Campo Obrigatorio!</label>
+            </div>
             <div class="form-group col-md">
               <label class="formTexto">Senha: *</label>
               <input type="text" class="fomr-control form-control-sm" formControlName="senha" required />
             </div>
           </div>
+          <div *ngIf="propriedade.senha.touched && propriedade.senha.invalid">
+            <label style="color: red;">* Campo Obrigatorio!</label>
+          </div>
           <div class="row g-2 mb-3">
             <label fclass="formTexto">Turma:</label>
             <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-              style="padding-left: 12px;" formControlName="turmaId" *ngFor=" let t of turmas">
-              <option [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
+              style="padding-left: 12px;" formControlName="turmaId" >
+              <option *ngFor=" let t of turmas" [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
             </select>
           </div>
           <div class="modal-footer">

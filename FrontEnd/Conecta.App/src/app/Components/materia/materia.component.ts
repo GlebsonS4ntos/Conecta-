@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Materia } from './Materia';
 import { MateriaService } from './materia.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['materia.component.css'],
 })
 export class MateriaComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: any = [];
   tituloFormulario: string;
   materias: Materia[];
   materiasFiltrados: Materia[];
@@ -46,15 +47,18 @@ export class MateriaComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {
-
-      this.getMaterias();
-      this.formulario = this.formBuilder.group({
-        //inicializando o formulario
-        materiaId: new FormControl(0),
-        nome: new FormControl('')
-      })
+  public get propriedade(){
+    return this.formulario.controls;
   }
+
+  ngOnInit(): void {
+    this.getMaterias();
+    this.formulario = new FormGroup({
+      //forms controle são os inputs
+      nome: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])
+    });
+  }
+
   public getMaterias(): void {
     this.materiaService.PegarTodos().subscribe(
       resultado => {
@@ -68,7 +72,7 @@ export class MateriaComponent implements OnInit {
     this.tituloFormulario = 'Nova Materia';
     this.formulario = new FormGroup({
       //forms controle são os inputs
-      nome: new FormControl(null)
+      nome: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])
     });
   }
   ExibirModalAtualizacao(materiaId): void {
@@ -77,7 +81,7 @@ export class MateriaComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle (imputs) recebendo o valor da materia
         materiaId: new FormControl(resultado.materiaId),
-        nome: new FormControl(resultado.nome)
+        nome: new FormControl(resultado.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])
       });
     });
   }

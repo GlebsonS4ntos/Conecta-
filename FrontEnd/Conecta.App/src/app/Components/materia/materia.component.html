@@ -54,9 +54,9 @@
             <label class="formTexto">Nome: *</label>
             <input type="text" class="fomr-control form-control-sm" formControlName="nome" required>
           </div>
-          <div *ngIf="formulario.get('nome')?.errors?.['required'] && formulario.get('nome')?.touched">
-            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
-           </div>
+          <div *ngIf="propriedade.nome.touched && propriedade.nome.invalid">
+            <label style="color: red;">* O Campo deve ter de 3 a 30 Caracteres!</label>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="!formulario.valid">Salvar</button>

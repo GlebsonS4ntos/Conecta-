@@ -10,7 +10,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['professor.component.css'],
 })
 export class ProfessorComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: any = [];
   tituloFormulario: string;
   professores: Professor[];
   professoresFiltrados: Professor[];
@@ -46,16 +46,19 @@ export class ProfessorComponent implements OnInit {
     private builder : FormBuilder
 
   ) {}
-
+  public get propriedade(){
+    return this.formulario.controls;
+  }
+  
   ngOnInit(): void {
     this.getProfessores();
-    this.formulario = this.builder.group({
+    this.formulario = new FormGroup({
       professorId: new FormControl(0),
-      nome: new FormControl(null, [Validators.required]),
-      telefone: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      senha: new FormControl(null, [Validators.required]),
-      cpf: new FormControl(null, [Validators.required])
+      nome: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+      telefone: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
+      email: new FormControl(null,  [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
+      senha: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]),
+      cpf: new FormControl(null,  [Validators.required, Validators.minLength(14), Validators.maxLength(14)])
     });
   }
 
@@ -72,11 +75,11 @@ export class ProfessorComponent implements OnInit {
     this.tituloFormulario = 'Novo Professor';
     this.formulario = new FormGroup({
       //forms controle são os inputs
-        nome: new FormControl(null),
-        telefone: new FormControl(null),
-        email: new FormControl(null),
-        senha: new FormControl(null),
-        cpf: new FormControl(null)
+      nome: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+      telefone: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
+      email: new FormControl(null,  [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
+      senha: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]),
+      cpf: new FormControl(null,  [Validators.required, Validators.minLength(14), Validators.maxLength(14)])
     });
   }
   ExibirModalAtualizacao(professorId): void {
@@ -85,11 +88,11 @@ export class ProfessorComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle são os inputs
         professorId: new FormControl(resultado.professorId),
-        nome: new FormControl(resultado.nome),
-        telefone: new FormControl(resultado.telefone),
-        email: new FormControl(resultado.email),
-        senha: new FormControl(resultado.senha),
-        cpf: new FormControl(resultado.cpf)
+        nome: new FormControl(resultado.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+        telefone: new FormControl(resultado.telefone, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]),
+        email: new FormControl(resultado.email,  [Validators.required, Validators.minLength(10), Validators.maxLength(50)]),
+        senha: new FormControl(resultado.senha, [Validators.required, Validators.minLength(5), Validators.maxLength(10)]),
+        cpf: new FormControl(resultado.cpf,  [Validators.required, Validators.minLength(14), Validators.maxLength(14)])
       });
     });
   }
