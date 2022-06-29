@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Professor } from './Professor';
 import { ProfessorService } from './professor.service';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
-import { Validacoes } from './validacoes';
+import { FormControl, FormGroup, FormBuilder, Validators, } from '@angular/forms';
+import { Validacoes } from '../shared/validacoes';
 
 @Component({
   selector: 'app-professor',
@@ -137,28 +132,28 @@ export class ProfessorComponent implements OnInit {
         nome: new FormControl(resultado.nome, [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(30),
+          Validators.maxLength(30)
         ]),
         telefone: new FormControl(resultado.telefone, [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(20),
+          Validators.maxLength(20)
         ]),
         email: new FormControl(resultado.email, [
           Validators.required,
           Validators.minLength(10),
-          Validators.maxLength(50),
+          Validators.maxLength(50)
         ]),
         senha: new FormControl(resultado.senha, [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(10),
+          Validators.maxLength(10)
         ]),
         cpf: new FormControl(resultado.cpf, [
           Validators.required,
           Validators.minLength(14),
           Validators.maxLength(14),
-          Validacoes.isValidCpf(),
+          Validacoes.isValidCpf()
         ]),
       });
     });

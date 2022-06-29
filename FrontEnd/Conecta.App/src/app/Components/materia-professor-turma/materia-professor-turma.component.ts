@@ -16,7 +16,7 @@ import { MateriaProfessorTurmaService } from './materia-professor-turma.service'
   styleUrls: ['materia-professor-turma.component.css'],
 })
 export class MateriaProfessorTurmaComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: any = [];
   tituloFormulario: string;
   materiaProfessorTurmas: materiaProfessorTurma[];
   materiaProfessorTurmasFiltrados: materiaProfessorTurma[];

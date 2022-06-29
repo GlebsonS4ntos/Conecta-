@@ -55,7 +55,11 @@ export class MateriaComponent implements OnInit {
     this.getMaterias();
     this.formulario = new FormGroup({
       //forms controle são os inputs
-      nome: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])
+      nome: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]),
     });
   }
 
@@ -78,17 +82,22 @@ export class MateriaComponent implements OnInit {
   ExibirModalAtualizacao(materiaId): void {
     this.materiaService.PegarPeloId(materiaId).subscribe(resultado => {
       this.tituloFormulario = `Atualizar: `;
+
       this.formulario = new FormGroup({
         //forms controle (imputs) recebendo o valor da materia
         materiaId: new FormControl(resultado.materiaId),
-        nome: new FormControl(resultado.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])
+        nome: new FormControl(resultado.nome, [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)
+        ]),
       });
     });
   }
   EnviarFormulario(): void {
     //criar as variaveis para ter os dados do form
     const materia: Materia = this.formulario.value;
-    if (materia.materiaId != null) {
+    if (materia.materiaId > 0) {
       this.materiaService.AtualizarMateria(materia).subscribe(resultado => {
         this.toastr.warning('Atualizado com Sucesso!');
         this.materiaService.PegarTodos().subscribe((registros) => {

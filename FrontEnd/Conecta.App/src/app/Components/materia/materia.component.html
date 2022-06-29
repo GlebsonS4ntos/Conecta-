@@ -26,7 +26,7 @@
         <td>{{ materia.nome }}</td>
         <td style="display: flex">
           <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(materia.materiaId)" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
-          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materia.materiaId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir" ><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materia.materiaId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-pencil-square"></i></button>
         </td>
       </tr>
     </tbody>
@@ -50,16 +50,16 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
-          <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">Nome: *</label>
-            <input type="text" class="fomr-control form-control-sm" formControlName="nome" required>
-          </div>
-          <div *ngIf="propriedade.nome.touched && propriedade.nome.invalid">
-            <label style="color: red;">* O Campo deve ter de 3 a 30 Caracteres!</label>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nome:*</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" required formControlName="nome">
+            <div *ngIf="propriedade.nome.touched && propriedade.nome.invalid">
+              <label style="color: red;">* Digite uma Materia ! </label>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="!formulario.valid">Salvar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>
           </div>
         </form>
       </div>

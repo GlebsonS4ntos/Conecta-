@@ -45,8 +45,7 @@
 </div>
 
 <!-- Modael Adicionar e Editar-->
-<div class="modal fade" id="modalAtualizarEInserir" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -55,12 +54,12 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
-          <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">Codigo: *</label>
-            <input type="text" class="fomr-control form-control-sm" formControlName="codigoTurma" required>
-          </div>
-          <div *ngIf="propriedade.codigoTurma.touched && propriedade.codigoTurma.invalid">
-            <label style="color: red;">* Campo Obrigatorio, com 6 Caracteres</label>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">TURMA:*</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" required formControlName="codigoTurma">
+            <div *ngIf="propriedade.codigoTurma.touched && propriedade.codigoTurma.invalid">
+              <label style="color: red;">Campo Obrigatorio! Digite 06 digitos ! </label>
+            </div>
           </div>
           <div class=" modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

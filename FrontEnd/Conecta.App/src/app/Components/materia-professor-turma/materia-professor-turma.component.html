@@ -48,22 +48,22 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
-          <div class="row g-2 mb-3">
-            <label fclass="formTexto">Materia:</label>
+          <div class="mb-3">
+            <label  fclass="formTexto">MATERIA:*</label>
             <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-              style="padding-left: 12px;" formControlName="materiaId">
-                <option *ngFor=" let m of materias" [ngValue]="m.materiaId"> {{ m.nome }} </option>
-            </select>
-          </div>
-          <div class="row g-2 mb-3">
-            <label fclass="formTexto">Turma:</label>
-            <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-              style="padding-left: 12px;" formControlName="turmaId" >
-                <option *ngFor=" let t of turmas" [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
-            </select>
-          </div>
-           <div class="row g-2 mb-3">
-            <label fclass="formTexto">Professor:</label>
+            style="padding-left: 12px;" formControlName="materiaId" >
+            <option *ngFor=" let m of materias" [ngValue]="m.materiaId"> {{ m.nome }} </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label  fclass="formTexto">TURMA:*</label>
+          <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
+          style="padding-left: 12px;" formControlName="turmaId" >
+          <option *ngFor=" let t of turmas" [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
+        </select>
+      </div>
+           <div class="mb-3">
+            <label fclass="formTexto">PROFESSOR:*</label>
             <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
               style="padding-left: 12px;" formControlName="professorId" >
                 <option *ngFor=" let p of professores" [ngValue]="p.professorId"> {{ p.nome }} </option>
@@ -71,7 +71,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="formulario.invalid">Salvar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>
           </div>
         </form>
       </div>
