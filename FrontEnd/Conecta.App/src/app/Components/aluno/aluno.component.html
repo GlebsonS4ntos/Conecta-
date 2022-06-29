@@ -127,7 +127,7 @@
           <div class="row g-2 mb-3">
             <div class="form-group col-md">
               <label class="formTexto">DataNasc: *</label>
-              <input type="text" class="fomr-control form-control-sm" formControlName="dataNasc" required />
+              <input type="date" class="fomr-control form-control-sm" formControlName="dataNasc" required />
             </div>
             <div *ngIf="propriedade.dataNasc.touched && propriedade.dataNasc.invalid">
               <label style="color: red;">* Campo Obrigatorio!</label>
