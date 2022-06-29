@@ -1,3 +1,9 @@
+import { TurmasService } from './../turmas/turmas.service';
+import { ProfessorService } from './../professor/professor.service';
+import { MateriaService } from './../materia/materia.service';
+import { Turma } from './../turmas/Turma';
+import { Professor } from './../professor/Professor';
+import { Materia } from './../materia/Materia';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { materiaProfessorTurma } from './materiaProfessorTurma';
@@ -14,6 +20,9 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   tituloFormulario: string;
   materiaProfessorTurmas: materiaProfessorTurma[];
   materiaProfessorTurmasFiltrados: materiaProfessorTurma[];
+  materias : Materia[];
+  professores : Professor[];
+  turmas: Turma[];
 
   idDeletar: number = null;
 
@@ -25,11 +34,13 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   constructor(
     private materiaProfessorTurmaService: MateriaProfessorTurmaService,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private materiaService : MateriaService,
+    private professorService : ProfessorService,
+    private turmasService : TurmasService
   ) {}
 
   ngOnInit(): void {
-
       this.getMateriaProfessorTurmas();
       this.formulario = this.formBuilder.group({
         //inicializando o formulario
@@ -44,6 +55,21 @@ export class MateriaProfessorTurmaComponent implements OnInit {
       resultado => {
         this.materiaProfessorTurmas = resultado,
         this.materiaProfessorTurmasFiltrados = this.materiaProfessorTurmas
+      }
+    );
+    this.materiaService.PegarTodos().subscribe(
+      resultado => {
+        this.materias = resultado
+      }
+    );
+    this.professorService.PegarTodos().subscribe(
+      resultado => {
+        this.professores = resultado
+      }
+    );
+    this.turmasService.PegarTodos().subscribe(
+      resultado => {
+        this.turmas = resultado
       }
     );
   }

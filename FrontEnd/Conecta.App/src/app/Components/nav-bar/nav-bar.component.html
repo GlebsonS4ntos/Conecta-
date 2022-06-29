@@ -1,7 +1,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap');
 </style>
-<nav class="navbar shadow navbar-dark cornavbar fixed-top" *ngIf="navbarVisible">
+<nav class="navbar shadow navbar-dark cornavbar fixed-top">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
       aria-controls="offcanvasExample">
@@ -68,7 +68,7 @@
       </a>
     </li>
   </ul>
-  <a routerLink="/Login" type="button" class="btn btn-outline-success" data-bs-dismiss="offcanvas" (click)="alterarVisibilidadeNavbar()">
+  <a type="button" class="btn btn-outline-success" data-bs-dismiss="offcanvas" (click)="login()">
     Sou ConectaLover <i class="bi bi-heart"></i>
   </a>
 </div>

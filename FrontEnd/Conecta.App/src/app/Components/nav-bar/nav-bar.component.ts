@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -7,8 +9,8 @@ import * as $ from 'jquery';
 })
 export class NavBarComponent implements OnInit {
   LogoPath = 'assets/imgs/LogoProjeto.png';
-  navbarVisible = true;
-  constructor() { }
+  @Output() navbarVisible: boolean = true ;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     $(function(){
@@ -22,8 +24,7 @@ export class NavBarComponent implements OnInit {
       });
     });
   }
-
-  alterarVisibilidadeNavbar():void{
-    this.navbarVisible = !this.navbarVisible;
+  login(){
+    this.router.navigate(['/NavBar/Login']);
   }
 }

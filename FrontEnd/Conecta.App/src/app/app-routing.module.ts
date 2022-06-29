@@ -12,15 +12,17 @@ import { QuemSomosComponent } from './Components/quem-somos/quem-somos.component
 import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
 
 const routes: Routes = [
+  {path: 'NavBar', component:NavBarComponent, children:[
+    {path: 'NavBar/Login', component:LoginComponent}
+  ]},
   {path: '', component:HomePageComponent},
   {path: 'QuemSomos', component:QuemSomosComponent},
-  {path: 'Login', component:LoginComponent},
+  {path: 'NavBar/Login', component:LoginComponent},
   {path: 'Duvidas', component:DuvidasComponent},
   {path: 'Turmas', component:TurmasComponent},
   {path: 'Materia', component:MateriaComponent},
   {path: 'Professor', component:ProfessorComponent},
   {path: 'Aluno', component:AlunoComponent},
-  {path: 'NavBar', component:NavBarComponent},
   {path: 'MateriaProfessorTurmas', component:MateriaProfessorTurmaComponent}
 ];
 

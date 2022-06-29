@@ -59,9 +59,9 @@
             <label class="formTexto">Codigo: *</label>
             <input type="text" class="fomr-control form-control-sm" formControlName="codigoTurma" required>
           </div>
-          <div *ngIf="formulario.get('codigoTurma')?.errors?.['required'] && formulario.get('codigoTurma')?.touched">
-            <p style="color: red; font-size: 10px;">Codigo Não digitado</p>
-           </div>
+          <div *ngIf="propriedade.codigoTurma.touched && propriedade.codigoTurma.invalid">
+            <label style="color: red;">* Campo Obrigatorio, com 6 Caracteres</label>
+          </div>
           <div class=" modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>

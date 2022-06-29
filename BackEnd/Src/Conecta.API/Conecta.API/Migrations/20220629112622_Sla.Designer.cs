@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conecta.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220628172015_inicial")]
-    partial class inicial
+    [Migration("20220629112622_Sla")]
+    partial class Sla
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,9 +234,9 @@ namespace Conecta.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CodigoTurma")
+                    b.Property<string>("CodigoTurma")
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("TurmaId");
 

@@ -11,7 +11,7 @@ import { Validators } from '@angular/forms';
   styleUrls: ['turmas.component.css'],
 })
 export class TurmasComponent implements OnInit {
-  formulario: FormGroup;
+  formulario: any = [];
   tituloFormulario: string;
   turmas: Turma[];
   private _search: string = ''; //campodeBusca
@@ -20,8 +20,7 @@ export class TurmasComponent implements OnInit {
 
   constructor(
     private turmasService: TurmasService,
-    private toastr: ToastrService,
-    private builder: FormBuilder
+    private toastr: ToastrService
   ) {}
 
   public get search() {
@@ -46,11 +45,15 @@ export class TurmasComponent implements OnInit {
     console.log(this.idDeletar);
   }
 
+  public get propriedade(){
+    return this.formulario.controls;
+  }
+
   ngOnInit(): void {
     this.getTurmas();
-    this.formulario = this.builder.group({
+    this.formulario = new FormGroup({
       //forms controle são os inputs
-      codigoTurma: new FormControl(null, [Validators.required])
+      codigoTurma: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)])
     });
   }
 
@@ -67,7 +70,7 @@ export class TurmasComponent implements OnInit {
     this.tituloFormulario = 'Nova Turma: ';
     this.formulario = new FormGroup({
       //forms controle são os inputs
-      codigoTurma: new FormControl(null),
+      codigoTurma: new FormControl(null,[Validators.required, Validators.minLength(6), Validators.maxLength(6),]),
     });
   }
 
@@ -78,7 +81,7 @@ export class TurmasComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle são os inputs
         turmaId: new FormControl(resultado.turmaId),
-        codigoTurma: new FormControl(resultado.codigoTurma),
+        codigoTurma: new FormControl(resultado.codigoTurma,[Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
       });
     });
   }
@@ -86,6 +89,7 @@ export class TurmasComponent implements OnInit {
   EnviarFormulario(): void {
     //criar as variaveis para ter os dados do form
     const turma: Turma = this.formulario.value;
+    console.log(turma);
 
     if (turma.turmaId > 0) {
       this.turmasService.AtualizarTurma(turma).subscribe((resultado) => {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Conecta.API.Migrations
 {
-    public partial class inicial : Migration
+    public partial class Sla : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,36 +57,13 @@ namespace Conecta.API.Migrations
                 {
                     TurmaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CodigoTurma = table.Column<int>(type: "int", maxLength: 10, nullable: false)
+                    CodigoTurma = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Turma", x => x.TurmaId);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "MateriaProfessor",
-                columns: table => new
-                {
-                    MateriasMateriaId = table.Column<int>(type: "int", nullable: false),
-                    ProfessoresProfessorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MateriaProfessor", x => new { x.MateriasMateriaId, x.ProfessoresProfessorId });
-                    table.ForeignKey(
-                        name: "FK_MateriaProfessor_Materia_MateriasMateriaId",
-                        column: x => x.MateriasMateriaId,
-                        principalTable: "Materia",
-                        principalColumn: "MateriaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MateriaProfessor_Professor_ProfessoresProfessorId",
-                        column: x => x.ProfessoresProfessorId,
-                        principalTable: "Professor",
-                        principalColumn: "ProfessorId",
-                        onDelete: ReferentialAction.Cascade);
-                });
 
             migrationBuilder.CreateTable(
                 name: "Aluno",
@@ -151,53 +128,6 @@ namespace Conecta.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "MateriaTurma",
-                columns: table => new
-                {
-                    MateriasMateriaId = table.Column<int>(type: "int", nullable: false),
-                    TurmasTurmaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MateriaTurma", x => new { x.MateriasMateriaId, x.TurmasTurmaId });
-                    table.ForeignKey(
-                        name: "FK_MateriaTurma_Materia_MateriasMateriaId",
-                        column: x => x.MateriasMateriaId,
-                        principalTable: "Materia",
-                        principalColumn: "MateriaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MateriaTurma_Turma_TurmasTurmaId",
-                        column: x => x.TurmasTurmaId,
-                        principalTable: "Turma",
-                        principalColumn: "TurmaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProfessorTurma",
-                columns: table => new
-                {
-                    ProfessoresProfessorId = table.Column<int>(type: "int", nullable: false),
-                    TurmasTurmaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProfessorTurma", x => new { x.ProfessoresProfessorId, x.TurmasTurmaId });
-                    table.ForeignKey(
-                        name: "FK_ProfessorTurma_Professor_ProfessoresProfessorId",
-                        column: x => x.ProfessoresProfessorId,
-                        principalTable: "Professor",
-                        principalColumn: "ProfessorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProfessorTurma_Turma_TurmasTurmaId",
-                        column: x => x.TurmasTurmaId,
-                        principalTable: "Turma",
-                        principalColumn: "TurmaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
 
             migrationBuilder.CreateTable(
                 name: "Nota",
@@ -279,11 +209,6 @@ namespace Conecta.API.Migrations
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MateriaProfessor_ProfessoresProfessorId",
-                table: "MateriaProfessor",
-                column: "ProfessoresProfessorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MateriaProfessorTurma_MateriaId",
                 table: "MateriaProfessorTurma",
                 column: "MateriaId");
@@ -299,16 +224,6 @@ namespace Conecta.API.Migrations
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MateriaProfessorTurmaNota_NotasNotaId",
-                table: "MateriaProfessorTurmaNota",
-                column: "NotasNotaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MateriaTurma_TurmasTurmaId",
-                table: "MateriaTurma",
-                column: "TurmasTurmaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Nota_AlunoId",
                 table: "Nota",
                 column: "AlunoId");
@@ -322,11 +237,6 @@ namespace Conecta.API.Migrations
                 name: "IX_NotaDetalhe_NotaId",
                 table: "NotaDetalhe",
                 column: "NotaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProfessorTurma_TurmasTurmaId",
-                table: "ProfessorTurma",
-                column: "TurmasTurmaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -335,19 +245,7 @@ namespace Conecta.API.Migrations
                 name: "Adms");
 
             migrationBuilder.DropTable(
-                name: "MateriaProfessor");
-
-            migrationBuilder.DropTable(
-                name: "MateriaProfessorTurmaNota");
-
-            migrationBuilder.DropTable(
-                name: "MateriaTurma");
-
-            migrationBuilder.DropTable(
                 name: "NotaDetalhe");
-
-            migrationBuilder.DropTable(
-                name: "ProfessorTurma");
 
             migrationBuilder.DropTable(
                 name: "MateriaProfessorTurma");

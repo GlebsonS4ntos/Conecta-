@@ -1,6 +1,5 @@
 export class Aluno{
   alunoId: number ;
-  foto:string ;
   nome: string;
   cpf:string ;
   cep:string ;
@@ -11,4 +10,5 @@ export class Aluno{
   telefone: string;
   email:string ;
   senha:string ;
+  turmaId: number;
 }
