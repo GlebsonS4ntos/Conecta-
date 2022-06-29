@@ -24,7 +24,7 @@
         <td>{{ materiaProfessorTurma.professorId }}</td>
         <td style="display: flex">
           <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
-          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#modalAtualizarEInserir" ><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-pencil-square"></i></button>
         </td>
       </tr>
     </tbody>
@@ -48,30 +48,30 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
-          <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">MateriaId: *</label>
-            <input type="number" class="fomr-control form-control-sm" formControlName="materiaId" required>
+          <div class="row g-2 mb-3">
+            <label fclass="formTexto">Materia:</label>
+            <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
+              style="padding-left: 12px;" formControlName="materiaId" *ngFor=" let m of materias">
+              <option [ngValue]="m.materiaId"> {{ m.nome }} </option>
+            </select>
           </div>
-          <div *ngIf="formulario.get('materiaId')?.errors?.['required'] && formulario.get('materiaId')?.touched">
-            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
-           </div>
-           <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">TurmaId: *</label>
-            <input type="number" class="fomr-control form-control-sm" formControlName="turmaId" required>
+          <div class="row g-2 mb-3">
+            <label fclass="formTexto">Turma:</label>
+            <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
+              style="padding-left: 12px;" formControlName="turmaId" *ngFor=" let t of turmas">
+              <option [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
+            </select>
           </div>
-          <div *ngIf="formulario.get('turmaId')?.errors?.['required'] && formulario.get('turmaId')?.touched">
-            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
-           </div>
-           <div class="form-group col-md-2 mb-3">
-            <label class="formTexto">ProfessorId:*</label>
-            <input type="number" class="fomr-control form-control-sm" formControlName="professorId" required>
+           <div class="row g-2 mb-3">
+            <label fclass="formTexto">Professor:</label>
+            <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
+              style="padding-left: 12px;" formControlName="professorId" *ngFor=" let p of professores">
+              <option [ngValue]="p.professorId"> {{ p.nome }} </option>
+            </select>
           </div>
-          <div *ngIf="formulario.get('professorId')?.errors?.['required'] && formulario.get('professorId')?.touched">
-            <p style="color: red; font-size: 10px;">Campo Não digitado</p>
-           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="!formulario.valid">Salvar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [class.disabled]="formulario.invalid">Salvar</button>
           </div>
         </form>
       </div>

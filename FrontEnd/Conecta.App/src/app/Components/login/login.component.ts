@@ -1,3 +1,4 @@
+import { NavBarComponent } from './../nav-bar/nav-bar.component';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Professor } from './../professor/Professor';
@@ -5,7 +6,7 @@ import { Aluno } from './../aluno/Aluno';
 import { AdmService } from './../shared/adm.service';
 import { AlunoService } from './../aluno/aluno.service';
 import { ProfessorService } from './../professor/professor.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Adm } from '../shared/Adm';
 import { Router } from '@angular/router';
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   aluno: Aluno;
   adm: Adm;
   professor: Professor;
+  @Input() navbarVisible: boolean;
 
   constructor(private admService : AdmService,
     private professorService:ProfessorService,
@@ -36,7 +38,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService ) {}
 
-  ngOnInit(): void{}
+  ngOnInit(): void{
+    this.navbarVisible = false;
+  }
 
   login():void {
     if(this.valorSelect == 3){
@@ -88,6 +92,9 @@ export class LoginComponent implements OnInit {
           if (this.alunosLista[i].email.toLowerCase() == this.email.toLowerCase() &&
           this.alunosLista[i].senha.toLocaleLowerCase() == this.password.toLocaleLowerCase()){
             this.aluno = this.alunosLista[i];
+            const emailUsuario = this.aluno.nome
+            localStorage.setItem('EmailUsuarioLogado', emailUsuario);
+
             this.userValido = true;
             this.loginLoad = true;
             this.botao = false;

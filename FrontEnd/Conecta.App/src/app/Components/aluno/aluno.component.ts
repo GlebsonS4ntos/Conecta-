@@ -1,8 +1,10 @@
+import { TurmasService } from './../turmas/turmas.service';
+import { Turma } from './../turmas/Turma';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Aluno } from './Aluno';
 import { AlunoService } from './aluno.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -15,7 +17,9 @@ export class AlunoComponent implements OnInit {
   tituloFormulario: string;
   alunos: Aluno[];
   alunosFiltrados: Aluno[];
+  turmas!: Turma[];
   private _search: string = '';
+
   idDeletar: number = null;
 
   public get search() {
@@ -45,15 +49,19 @@ export class AlunoComponent implements OnInit {
   constructor(
     private alunoService: AlunoService,
     private toastr: ToastrService,
-    private builder : FormBuilder
-
+    private builder : FormBuilder,
+    private turmasService: TurmasService
   ) {}
 
   ngOnInit(): void {
     this.getAlunos();
+    this.turmasService.PegarTodos().subscribe(
+      resultado =>{
+      this.turmas = resultado
+      }
+    );
     this.formulario = this.builder.group({
       alunoId: new FormControl(0),
-      foto: new FormControl(null),
       nome: new FormControl(null),
       cpf: new FormControl(null),
       cep: new FormControl(null),
@@ -63,8 +71,9 @@ export class AlunoComponent implements OnInit {
       dataNasc: new FormControl(null),
       telefone: new FormControl(null),
       email: new FormControl(null),
-      senha: new FormControl(null)
-
+      senha: new FormControl(null),
+      foto: new FormControl(null),
+      turmaId: new FormControl(0)
     });
   }
 
@@ -81,7 +90,6 @@ export class AlunoComponent implements OnInit {
     this.tituloFormulario = 'Novo Aluno';
     this.formulario = new FormGroup({
       //forms controle são os inputs
-      foto: new FormControl(null),
       nome: new FormControl(null),
       cpf: new FormControl(null),
       cep: new FormControl(null),
@@ -91,7 +99,9 @@ export class AlunoComponent implements OnInit {
       dataNasc: new FormControl(null),
       telefone: new FormControl(null),
       email: new FormControl(null),
-      senha: new FormControl(null)
+      senha: new FormControl(null),
+      foto: new FormControl(null),
+      turmaId: new FormControl(0)
     });
   }
   ExibirModalAtualizacao(alunoId): void {
@@ -100,7 +110,6 @@ export class AlunoComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle são os inputs
         alunoId: new FormControl(resultado.alunoId),
-        foto: new FormControl(resultado.foto),
         nome: new FormControl(resultado.nome),
         cpf: new FormControl(resultado.cpf),
         cep: new FormControl(resultado.cep),
@@ -110,15 +119,14 @@ export class AlunoComponent implements OnInit {
         dataNasc: new FormControl(resultado.dataNasc),
         telefone: new FormControl(resultado.telefone),
         email: new FormControl(resultado.email),
-        senha: new FormControl(resultado.senha)
-
+        senha: new FormControl(resultado.senha),
+        turmaId: new FormControl(resultado.turmaId)
       });
     });
   }
   EnviarFormulario(): void {
     //criar a variavel para ter os dados do form
     const aluno: Aluno = this.formulario.value;
-
     if (aluno.alunoId > 0) {
       this.alunoService.AtualizarAluno(aluno).subscribe((resultado) => {
         this.toastr.warning('Atualizado com Sucesso!');
