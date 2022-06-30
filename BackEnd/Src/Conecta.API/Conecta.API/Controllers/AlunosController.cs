@@ -25,7 +25,7 @@ namespace Conecta.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
         {
-            return await _context.Aluno.ToListAsync();
+            return await _context.Aluno.Include(x=>x.Turma).ToListAsync();
         }
 
         // GET: api/Alunos/5

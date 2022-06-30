@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\vivia\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\vivia\\.nuget\\packages"
+      "C:\\Users\\glebs\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\glebs\\.nuget\\packages"
     ]
   }
 }

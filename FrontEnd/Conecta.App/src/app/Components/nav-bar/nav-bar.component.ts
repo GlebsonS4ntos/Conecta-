@@ -10,6 +10,8 @@ import * as $ from 'jquery';
 export class NavBarComponent implements OnInit {
   LogoPath = 'assets/imgs/LogoProjeto.png';
   @Output() navbarVisible: boolean = true ;
+  visibilidadeAdm: boolean = false;
+  @Output() visibilidadeProf: boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class NavBarComponent implements OnInit {
         $(this).addClass('active');
       });
     });
+    localStorage.clear();
   }
   login(){
     this.router.navigate(['/NavBar/Login']);

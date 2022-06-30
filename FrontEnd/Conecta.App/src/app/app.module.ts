@@ -25,6 +25,7 @@ import { AlunoComponent } from './Components/aluno/aluno.component';
 import { AlunoService } from './Components/aluno/aluno.service';
 import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
 import { MateriaProfessorTurmaService } from './Components/materia-professor-turma/materia-professor-turma.service';
+import { LancarNotasComponent } from './Components/LancarNotas/LancarNotas.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MateriaProfessorTurmaService } from './Components/materia-professor-tur
     MateriaComponent,
     ProfessorComponent,
     AlunoComponent,
-    MateriaProfessorTurmaComponent
+    MateriaProfessorTurmaComponent,
+    LancarNotasComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { MateriaProfessorTurmaService } from './Components/materia-professor-tur
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
+    BrowserModule,
     ToastrModule.forRoot(
       {
         timeOut: 4000,

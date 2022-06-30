@@ -1,6 +1,7 @@
 <br><br><br><br>
 <div class="container" style="display: flex; justify-content: end;">
-  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-outline-success" (click)="ExibirModalCadastro()" data-bs-toggle="modal"
+    data-bs-target="#exampleModal">
     Adicionar <i class="bi bi-plus-lg"></i></button>
 </div>
 <br><br><br>
@@ -11,27 +12,31 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">MateriaId</th>
-        <th scope="col">TurmaId</th>
-        <th scope="col">ProfessorId</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Turma</th>
+        <th scope="col">Professor</th>
       </tr>
     </thead>
     <tbody *ngIf="materiaProfessorTurmas && materiaProfessorTurmasFiltrados.length">
       <tr *ngFor="let materiaProfessorTurma of materiaProfessorTurmasFiltrados; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ materiaProfessorTurma.materiaId }}</td>
-        <td>{{ materiaProfessorTurma.turmaId }}</td>
-        <td>{{ materiaProfessorTurma.professorId }}</td>
+        <td>{{ materiaProfessorTurma.materia.nome }}</td>
+        <td>{{ materiaProfessorTurma.turma.codigoTurma }}</td>
+        <td>{{ materiaProfessorTurma.professor.nome }}</td>
         <td style="display: flex">
-          <button type="button" class="btn btn-outline-danger me-2" (click)="alterarIdDeletar(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
-          <button type="button" class="btn btn-outline-info" (click)="ExibirModalAtualizacao(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-outline-danger me-2"
+            (click)="alterarIdDeletar(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal"
+            data-bs-target="#modalDelete"><i class="bi bi-trash"></i></button>
+          <button type="button" class="btn btn-outline-info"
+            (click)="ExibirModalAtualizacao(materiaProfessorTurma.materiaProfessorTurmaId)" data-bs-toggle="modal"
+            data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
         </td>
       </tr>
     </tbody>
     <tfoot *ngIf="materiaProfessorTurmasFiltrados.length == 0">
       <tr>
         <td colspan="8">
-            <h4>Sem Registros</h4>
+          <h4>Sem Registros</h4>
         </td>
       </tr>
     </tfoot>
@@ -49,29 +54,30 @@
       <div class="modal-body">
         <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
           <div class="mb-3">
-            <label  fclass="formTexto">MATERIA:*</label>
+            <label fclass="formTexto">MATERIA:*</label>
             <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-            style="padding-left: 12px;" formControlName="materiaId" >
-            <option *ngFor=" let m of materias" [ngValue]="m.materiaId"> {{ m.nome }} </option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label  fclass="formTexto">TURMA:*</label>
-          <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-          style="padding-left: 12px;" formControlName="turmaId" >
-          <option *ngFor=" let t of turmas" [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
-        </select>
-      </div>
-           <div class="mb-3">
+              style="padding-left: 12px;" formControlName="materiaId">
+              <option *ngFor=" let m of materias" [ngValue]="m.materiaId"> {{ m.nome }} </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label fclass="formTexto">TURMA:*</label>
+            <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
+              style="padding-left: 12px;" formControlName="turmaId">
+              <option *ngFor=" let t of turmas" [ngValue]="t.turmaId"> {{ t.codigoTurma }} </option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label fclass="formTexto">PROFESSOR:*</label>
             <select class="form-select select" id="floatingSelect" aria-label="Floating label select"
-              style="padding-left: 12px;" formControlName="professorId" >
-                <option *ngFor=" let p of professores" [ngValue]="p.professorId"> {{ p.nome }} </option>
+              style="padding-left: 12px;" formControlName="professorId">
+              <option *ngFor=" let p of professores" [ngValue]="p.professorId"> {{ p.nome }} </option>
             </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formulario.invalid">Salvar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+              [disabled]="formulario.invalid">Salvar</button>
           </div>
         </form>
       </div>
@@ -79,7 +85,7 @@
   </div>
 </div>
 
-  <!--Modal de confirmação de delete-->
+<!--Modal de confirmação de delete-->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -89,11 +95,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="ExcluirMateriaProfessorTurma(idDeletar)">Sim</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+          (click)="ExcluirMateriaProfessorTurma(idDeletar)">Sim</button>
       </div>
     </div>
   </div>
 </div>
-
-
-

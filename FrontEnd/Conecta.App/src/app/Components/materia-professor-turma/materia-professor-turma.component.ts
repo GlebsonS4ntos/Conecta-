@@ -23,7 +23,9 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   materias : Materia[];
   professores : Professor[];
   turmas: Turma[];
-
+  materiaRecebida: string;
+  professorRecebido: Professor;
+  turmaRecebida: Turma;
   idDeletar: number = null;
 
   alterarIdDeletar(id: any) {
@@ -56,6 +58,7 @@ export class MateriaProfessorTurmaComponent implements OnInit {
         this.materiaProfessorTurmas = resultado,
         this.materiaProfessorTurmasFiltrados = this.materiaProfessorTurmas
       }
+
     );
     this.materiaService.PegarTodos().subscribe(
       resultado => {
@@ -122,5 +125,22 @@ export class MateriaProfessorTurmaComponent implements OnInit {
       });
     });
   }
+
+  // pegarNomeMateria(id:number){
+  //   this.materiaService.PegarPeloId(id).subscribe(
+  //     resultado =>{
+  //       this.materiaRecebida = resultado.nome;
+  //     }
+  //   );
+  //   console.log(this.materiaRecebida)
+  //   return this.materiaRecebida;
+  // }
+  // pegarCodigoTurma(id:number){
+  //   this.turmasService.PegarPeloId(id)
+  // }
+  // pegarNomeProfessor(id:number){
+  //   this.professorService.PegarPeloId(id)
+  // }
+
 }
 

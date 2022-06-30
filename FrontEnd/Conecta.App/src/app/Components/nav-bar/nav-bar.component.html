@@ -1,16 +1,16 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap');
 </style>
-<nav class="navbar shadow navbar-dark cornavbar fixed-top">
+<nav class="navbar shadow navbar-dark cornavbar fixed-top" *ngIf="navbarVisible">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
       aria-controls="offcanvasExample">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a href="" style="text-decoration: none; color: rgb(220, 221, 223); font-size: 30px; font-family: 'Ubuntu', sans-serif;">
+    <a [routerLink]="" routerLinkActive="router-link-active"  style="text-decoration: none; color: rgb(220, 221, 223); font-size: 30px; font-family: 'Ubuntu', sans-serif;">
       Conecta+
     </a>
-    <a href="">
+    <a routerLink="">
       <img [src]="LogoPath" class="Logo">
     </a>
   </div>
@@ -65,6 +65,12 @@
       <a class="nav-link link-dark" routerLink="/MateriaProfessorTurmas" data-bs-dismiss="offcanvas">
         <i class="bi bi-card-list me-2"></i>
         Materias-Professor-Turmas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark" routerLink="/LancarNotas" data-bs-dismiss="offcanvas">
+        <i class="bi bi-clipboard2-check me-2"></i>
+        Lançar Notas
       </a>
     </li>
   </ul>

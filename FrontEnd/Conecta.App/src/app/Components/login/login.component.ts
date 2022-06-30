@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
           if (this.professorLista[i].email.toLowerCase() == this.email.toLowerCase() &&
           this.professorLista[i].senha.toLocaleLowerCase() == this.password.toLocaleLowerCase()){
             this.professor = this.professorLista[i];
+            localStorage.setItem('idProfessor', this.professor.professorId.toString())
             this.userValido = true;
             this.loginLoad = true;
             this.botao = false;

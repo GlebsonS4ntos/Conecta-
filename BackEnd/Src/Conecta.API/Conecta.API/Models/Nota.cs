@@ -14,7 +14,7 @@ namespace Conecta.API.Models
         public decimal Bimestre3 { get; set; }
         public decimal Bimestre4 { get; set; }
         public DateTime Ano { get; set; }
-        public ICollection<MateriaProfessorTurma> MateriaProfessorTurmas { get; set; }
-        public ICollection<NotaDetalhe> NotaDetalhes { get; set; }
+        public int MateriaProfessorTurmasId { get; set; }
+        public MateriaProfessorTurma MateriaProfessorTurma { get; set; }
     }
 }
