@@ -26,6 +26,7 @@ import { AlunoService } from './Components/aluno/aluno.service';
 import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
 import { MateriaProfessorTurmaService } from './Components/materia-professor-turma/materia-professor-turma.service';
 import { LancarNotasComponent } from './Components/LancarNotas/LancarNotas.component';
+import { VisualizarNotaComponent } from './Components/visualizar-nota/visualizar-nota.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { LancarNotasComponent } from './Components/LancarNotas/LancarNotas.compo
     ProfessorComponent,
     AlunoComponent,
     MateriaProfessorTurmaComponent,
-    LancarNotasComponent
+    LancarNotasComponent,
+    VisualizarNotaComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { LancarNotasComponent } from './Components/LancarNotas/LancarNotas.compo
     BrowserModule,
     ToastrModule.forRoot(
       {
-        timeOut: 4000,
+        timeOut: 2500,
         positionClass: 'toast-top-right',
         preventDuplicates: true,
         progressBar: true,

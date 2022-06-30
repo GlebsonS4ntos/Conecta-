@@ -1,3 +1,4 @@
+import { VisualizarNotaComponent } from './Components/visualizar-nota/visualizar-nota.component';
 import { LancarNotasComponent } from './Components/LancarNotas/LancarNotas.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { AlunoComponent } from './Components/aluno/aluno.component';
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'Professor', component:ProfessorComponent},
   {path: 'Aluno', component:AlunoComponent},
   {path: 'MateriaProfessorTurmas', component:MateriaProfessorTurmaComponent},
-  {path: 'LancarNotas', component:LancarNotasComponent}
+  {path: 'LancarNotas', component:LancarNotasComponent},
+  {path: 'VisualizarNota', component:VisualizarNotaComponent}
 ];
 
 @NgModule({

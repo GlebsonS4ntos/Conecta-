@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Conecta.API.Migrations
 {
-    public partial class Concertando : Migration
+    public partial class AgrVai : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,8 +211,7 @@ namespace Conecta.API.Migrations
                     Bimestre3 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Bimestre4 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Ano = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MateriaProfessorTurmasId = table.Column<int>(type: "int", nullable: false),
-                    MateriaProfessorTurmaId = table.Column<int>(type: "int", nullable: true)
+                    MateriaProfessorTurmaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,13 +221,13 @@ namespace Conecta.API.Migrations
                         column: x => x.AlunoId,
                         principalTable: "Aluno",
                         principalColumn: "AlunoId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Nota_MateriaProfessorTurma_MateriaProfessorTurmaId",
                         column: x => x.MateriaProfessorTurmaId,
                         principalTable: "MateriaProfessorTurma",
                         principalColumn: "MateriaProfessorTurmaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
