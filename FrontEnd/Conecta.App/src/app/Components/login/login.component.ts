@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
   }
 
   login():void {
+    localStorage.clear();
+    if(this.email == null || this.password == null || this.valorSelect == null){
+      this.toastr.error("Preencha todos os Campos");
+    }
     if(this.valorSelect == 3){
       this.admService.PegarTodos().subscribe((data) => {
         this.admLista = data;
@@ -93,9 +97,7 @@ export class LoginComponent implements OnInit {
           if (this.alunosLista[i].email.toLowerCase() == this.email.toLowerCase() &&
           this.alunosLista[i].senha.toLocaleLowerCase() == this.password.toLocaleLowerCase()){
             this.aluno = this.alunosLista[i];
-            const emailUsuario = this.aluno.nome
-            localStorage.setItem('EmailUsuarioLogado', emailUsuario);
-
+            localStorage.setItem('idAluno', this.aluno.alunoId.toString());
             this.userValido = true;
             this.loginLoad = true;
             this.botao = false;

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conecta.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220630100521_Concertando")]
-    partial class Concertando
+    [Migration("20220630145452_AgrVai")]
+    partial class AgrVai
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -166,10 +166,7 @@ namespace Conecta.API.Migrations
                     b.Property<decimal>("Bimestre4")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("MateriaProfessorTurmaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MateriaProfessorTurmasId")
+                    b.Property<int>("MateriaProfessorTurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("NotaId");
@@ -322,7 +319,9 @@ namespace Conecta.API.Migrations
 
                     b.HasOne("Conecta.API.Models.MateriaProfessorTurma", "MateriaProfessorTurma")
                         .WithMany("Notas")
-                        .HasForeignKey("MateriaProfessorTurmaId");
+                        .HasForeignKey("MateriaProfessorTurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Aluno");
 

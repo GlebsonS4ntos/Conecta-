@@ -21,7 +21,6 @@ export class LancarNotasComponent implements OnInit {
   idTurma: number;
   private _valorSelected: materiaProfessorTurma;
   formularioNota: any = [];
-  formularioNotaDetalhes: any = [];
   tituloFormulario: string;
 
   public get valorSelected() {
@@ -31,8 +30,9 @@ export class LancarNotasComponent implements OnInit {
   public set valorSelected(m: materiaProfessorTurma) {
     this._valorSelected = m;
     this.alunosFiltrados = this.valorSelected
-      ? this.filtrarMaterias(this.valorSelected.toString())
+      ? this.filtrarMaterias(this.valorSelected.turmaId.toString())
       : this.alunos;
+    console.log(this.valorSelected)
   }
 
   get propriedade(){
@@ -58,6 +58,7 @@ export class LancarNotasComponent implements OnInit {
       bimestre3: new FormControl(0, [Validators.required]),
       bimestre4: new FormControl(0, [Validators.required]),
       ano: new FormControl(null),
+      materiaProfessorTurmaId : new FormControl(0)
     });
   }
 
@@ -73,7 +74,7 @@ export class LancarNotasComponent implements OnInit {
       (aluno: { turmaId: number }) =>
         aluno.turmaId
           .toString()
-          .indexOf(this.valorSelected.turmaId.toString()) !== -1
+          .indexOf(filtrarPor) !== -1
     );
   }
 
@@ -85,28 +86,29 @@ export class LancarNotasComponent implements OnInit {
             .toString()
             .indexOf(localStorage.getItem('idProfessor')) !== -1
       );
-      console.log(this.materiaProfessorTurmas);
     });
   }
 
   ExibirModalNota(id: number): void {
-    this.tituloFormulario = 'Novo Professor';
+    this.tituloFormulario = 'Nova Nota';
     this.formularioNota = new FormGroup({
       //forms controle são os inputs
       notaId:  new FormControl(0),
       alunoId: new FormControl(id),
-      bimestre1: new FormControl(0, [Validators.required]),
-      bimestre2: new FormControl(0, [Validators.required]),
-      bimestre3: new FormControl(0, [Validators.required]),
-      bimestre4: new FormControl(0, [Validators.required]),
-      ano: new FormControl(null),
-      materiaProfessorTurmaId : new FormControl(this.valorSelected)
+      bimestre1: new FormControl('', [Validators.required]),
+      bimestre2: new FormControl('', [Validators.required]),
+      bimestre3: new FormControl('', [Validators.required]),
+      bimestre4: new FormControl('', [Validators.required]),
+      ano: new FormControl(Date.now, [Validators.required]),
+      materiaProfessorTurmaId : new FormControl(this.valorSelected.materiaProfessorTurmaId)
     });
+    console.log(this.formularioNota)
   }
 
   EnviarFormulario(): void {
     //criar a variavel para ter os dados do form
     const nota: Nota = this.formularioNota.value;
+    console.log(nota)
     {
       this.notaService.SalvarNota(nota).subscribe((resultado) => {
         this.toastr.success('Nota inserida com Sucesso!');

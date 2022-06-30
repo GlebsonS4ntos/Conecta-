@@ -1,0 +1,38 @@
+<br><br><br><br>
+<div class="container">
+  <h1 class="titulo">Notas</h1>
+  <hr>
+</div>
+
+<div class="container" style="overflow: auto;">
+  <br><br><br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">N.Materia</th>
+        <th scope="col">Bimestre 1</th>
+        <th scope="col">Bimestre 2</th>
+        <th scope="col">Bimestre 3</th>
+        <th scope="col">Bimestre 4</th>
+        <th scope="col">Media</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="notas && notas.length">
+      <tr *ngFor="let nota of notas">
+        <td>{{ nota.materiaProfessorTurmaId }}</td>
+        <td>{{ nota.bimestre1 }}</td>
+        <td>{{ nota.bimestre2 }}</td>
+        <td>{{ nota.bimestre3 }}</td>
+        <td>{{ nota.bimestre4 }}</td>
+        <td>{{ (nota.bimestre1 + nota.bimestre2 + nota.bimestre3 + nota.bimestre4)/4}}</td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="notas.length == 0">
+      <tr>
+        <td colspan="8">
+          <h4>Sem Notas até o momento</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

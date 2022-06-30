@@ -164,10 +164,7 @@ namespace Conecta.API.Migrations
                     b.Property<decimal>("Bimestre4")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("MateriaProfessorTurmaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MateriaProfessorTurmasId")
+                    b.Property<int>("MateriaProfessorTurmaId")
                         .HasColumnType("int");
 
                     b.HasKey("NotaId");
@@ -320,7 +317,9 @@ namespace Conecta.API.Migrations
 
                     b.HasOne("Conecta.API.Models.MateriaProfessorTurma", "MateriaProfessorTurma")
                         .WithMany("Notas")
-                        .HasForeignKey("MateriaProfessorTurmaId");
+                        .HasForeignKey("MateriaProfessorTurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Aluno");
 

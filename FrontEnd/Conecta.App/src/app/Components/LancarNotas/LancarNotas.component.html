@@ -29,7 +29,7 @@
         <td>{{ aluno.nome }}</td>
         <td>{{ aluno.dataNasc }}</td>
         <td style="display: flex">
-          <button type="button" class="btn btn-outline-info" (click)="ExibirModalNota(aluno.alunoId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-clipboard2-plus"></i></button>
+          <button type="button" [disabled]="valorSelected == null" class="btn btn-outline-info" (click)="ExibirModalNota(aluno.alunoId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-clipboard2-plus"></i></button>
         </td>
       </tr>
     </tbody>
@@ -82,7 +82,7 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">N:*</label>
+            <label for="exampleFormControlInput1" class="form-label">Data:*</label>
             <input type="date" class="form-control" id="exampleFormControlInput1" required formControlName="ano">
             <div *ngIf="propriedade.bimestre4.touched && propriedade.bimestre4.invalid">
               <label style="color: red;">Campo Obrigatorio!</label>

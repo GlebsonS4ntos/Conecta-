@@ -44,13 +44,33 @@ namespace Conecta.API.Controllers
 
         // PUT: api/Notas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut]
-        public async Task<IActionResult> PutNota(Nota nota)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutNota(int id, Nota nota)
         {
-            _context.Nota.Update(nota);
-            await _context.SaveChangesAsync();
+            if (id != nota.NotaId)
+            {
+                return BadRequest();
+            }
 
-            return Ok();
+            _context.Entry(nota).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!NotaExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         // POST: api/Notas
