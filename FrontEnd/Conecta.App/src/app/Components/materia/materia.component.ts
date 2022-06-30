@@ -43,8 +43,7 @@ export class MateriaComponent implements OnInit {
 
   constructor(
     private materiaService: MateriaService,
-    private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private toastr: ToastrService
   ) {}
 
   public get propriedade(){

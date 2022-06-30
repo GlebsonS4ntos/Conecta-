@@ -23,7 +23,7 @@
           <th scope="col">Endereço</th>
           <th scope="col">Bairro</th>
           <th scope="col">Cidade</th>
-          <th scope="col">DataNasc</th>
+          <th scope="col">DataNascimento</th>
           <th scope="col">Telefone</th>
           <th scope="col">Email</th>
           <th scope="col">Senha</th>
@@ -34,7 +34,7 @@
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ aluno.nome }}</td>
           <td>{{aluno.cpf}}</td>
-          <td>{{aluno.turmaId}}</td>
+          <td>{{aluno.turma.codigoTurma}}</td>
           <td>{{aluno.cep}}</td>
           <td>{{aluno.endereco}}</td>
           <td>{{aluno.bairro}}</td>
@@ -118,7 +118,7 @@
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput2" class="form-label">DATA DE NASCIMENTO:* </label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" formControlName="dataNasc" required />
+            <input type="date" class="form-control" id="exampleFormControlInput2" formControlName="dataNasc" required />
             <div *ngIf="propriedade.dataNasc.touched && propriedade.dataNasc.invalid">
               <label style="color: red;">* Digite sua Data de Nascimento ! </label>
             </div>

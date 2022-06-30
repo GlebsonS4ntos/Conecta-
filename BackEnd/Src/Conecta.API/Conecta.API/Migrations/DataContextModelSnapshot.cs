@@ -164,33 +164,19 @@ namespace Conecta.API.Migrations
                     b.Property<decimal>("Bimestre4")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("MateriaProfessorTurmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MateriaProfessorTurmasId")
+                        .HasColumnType("int");
+
                     b.HasKey("NotaId");
 
                     b.HasIndex("AlunoId");
 
-                    b.ToTable("Nota");
-                });
-
-            modelBuilder.Entity("Conecta.API.Models.NotaDetalhe", b =>
-                {
-                    b.Property<int>("NotaDetalheId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MateriaProfessorTurmaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NotaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("NotaDetalheId");
-
                     b.HasIndex("MateriaProfessorTurmaId");
 
-                    b.HasIndex("NotaId");
-
-                    b.ToTable("NotaDetalhe");
+                    b.ToTable("Nota");
                 });
 
             modelBuilder.Entity("Conecta.API.Models.Professor", b =>
@@ -254,21 +240,6 @@ namespace Conecta.API.Migrations
                     b.HasIndex("ProfessoresProfessorId");
 
                     b.ToTable("MateriaProfessor");
-                });
-
-            modelBuilder.Entity("MateriaProfessorTurmaNota", b =>
-                {
-                    b.Property<int>("MateriaProfessorTurmasMateriaProfessorTurmaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NotasNotaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MateriaProfessorTurmasMateriaProfessorTurmaId", "NotasNotaId");
-
-                    b.HasIndex("NotasNotaId");
-
-                    b.ToTable("MateriaProfessorTurmaNota");
                 });
 
             modelBuilder.Entity("MateriaTurma", b =>
@@ -347,22 +318,13 @@ namespace Conecta.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Aluno");
-                });
-
-            modelBuilder.Entity("Conecta.API.Models.NotaDetalhe", b =>
-                {
                     b.HasOne("Conecta.API.Models.MateriaProfessorTurma", "MateriaProfessorTurma")
-                        .WithMany()
+                        .WithMany("Notas")
                         .HasForeignKey("MateriaProfessorTurmaId");
 
-                    b.HasOne("Conecta.API.Models.Nota", "Nota")
-                        .WithMany("NotaDetalhes")
-                        .HasForeignKey("NotaId");
+                    b.Navigation("Aluno");
 
                     b.Navigation("MateriaProfessorTurma");
-
-                    b.Navigation("Nota");
                 });
 
             modelBuilder.Entity("MateriaProfessor", b =>
@@ -376,21 +338,6 @@ namespace Conecta.API.Migrations
                     b.HasOne("Conecta.API.Models.Professor", null)
                         .WithMany()
                         .HasForeignKey("ProfessoresProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MateriaProfessorTurmaNota", b =>
-                {
-                    b.HasOne("Conecta.API.Models.MateriaProfessorTurma", null)
-                        .WithMany()
-                        .HasForeignKey("MateriaProfessorTurmasMateriaProfessorTurmaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Conecta.API.Models.Nota", null)
-                        .WithMany()
-                        .HasForeignKey("NotasNotaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -430,9 +377,9 @@ namespace Conecta.API.Migrations
                     b.Navigation("Notas");
                 });
 
-            modelBuilder.Entity("Conecta.API.Models.Nota", b =>
+            modelBuilder.Entity("Conecta.API.Models.MateriaProfessorTurma", b =>
                 {
-                    b.Navigation("NotaDetalhes");
+                    b.Navigation("Notas");
                 });
 #pragma warning restore 612, 618
         }

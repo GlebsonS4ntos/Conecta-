@@ -45,8 +45,7 @@ export class ProfessorComponent implements OnInit {
 
   constructor(
     private professorService: ProfessorService,
-    private toastr: ToastrService,
-    private builder: FormBuilder
+    private toastr: ToastrService
   ) {}
   public get propriedade() {
     return this.formulario.controls;

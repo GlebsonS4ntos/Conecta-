@@ -1,0 +1,99 @@
+<br><br><br><br>
+<div class="container">
+  <div class="titulo">Turmas</div>
+  <hr>
+  <br><br><br>
+  <!-- Select -->
+  <div class="mb-3" style="width: 400px">
+    <label fclass="formTexto" class="mb-2">Selecione a Turma:</label>
+    <select class="form-select select" id="floatingSelect" aria-label="Floating label select" style="padding-left: 12px;" [(ngModel)]="valorSelected">
+        <option  *ngFor=" let materiaProfessorTurma of materiaProfessorTurmas" [ngValue]="materiaProfessorTurma">
+          {{ materiaProfessorTurma.turma.codigoTurma }} - {{ materiaProfessorTurma.materia.nome }}
+        </option>
+    </select>
+  </div>
+  <br><br>
+  <!-- tabela -->
+  <table class="table">
+     <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">DataNascimento</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="alunos && alunosFiltrados.length">
+      <tr *ngFor="let aluno of alunosFiltrados; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ aluno.nome }}</td>
+        <td>{{ aluno.dataNasc }}</td>
+        <td style="display: flex">
+          <button type="button" class="btn btn-outline-info" (click)="ExibirModalNota(aluno.alunoId)" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="bi bi-clipboard2-plus"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="alunosFiltrados.length == 0">
+      <tr>
+        <td colspan="8">
+            <h4>Sem Registros</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- Modal de Nota -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ tituloFormulario }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formularioNota" (ngSubmit)="EnviarFormulario()">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Bimestre1:*</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" required formControlName="bimestre1">
+            <div *ngIf="propriedade.bimestre1touched && propriedade.bimestre1.invalid">
+              <label style="color: red;">Campo Obrigatorio!</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Bimestre2:*</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" required formControlName="bimestre2">
+            <div *ngIf="propriedade.bimestre2.touched && propriedade.bimestre2.invalid">
+              <label style="color: red;">Campo Obrigatorio!</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Bimestre3:*</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" required formControlName="bimestre3">
+            <div *ngIf="propriedade.bimestre3.touched && propriedade.bimestre3.invalid">
+              <label style="color: red;">Campo Obrigatorio!</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Bimestre4:*</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" required formControlName="bimestre4">
+            <div *ngIf="propriedade.bimestre4.touched && propriedade.bimestre4.invalid">
+              <label style="color: red;">Campo Obrigatorio!</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">N:*</label>
+            <input type="date" class="form-control" id="exampleFormControlInput1" required formControlName="ano">
+            <div *ngIf="propriedade.bimestre4.touched && propriedade.bimestre4.invalid">
+              <label style="color: red;">Campo Obrigatorio!</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formularioNota.invalid">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

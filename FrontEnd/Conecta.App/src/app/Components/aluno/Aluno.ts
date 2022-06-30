@@ -1,3 +1,4 @@
+import { Turma } from './../turmas/Turma';
 export class Aluno{
   alunoId: number ;
   nome: string;
@@ -11,4 +12,5 @@ export class Aluno{
   email:string ;
   senha:string ;
   turmaId: number;
+  turma: Turma;
 }

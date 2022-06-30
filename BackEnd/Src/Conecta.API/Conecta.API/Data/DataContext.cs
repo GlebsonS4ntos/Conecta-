@@ -23,6 +23,5 @@ namespace Conecta.API.Data
 
         public DbSet<Conecta.API.Models.MateriaProfessorTurma> MateriaProfessorTurma { get; set; }
 
-        public DbSet<Conecta.API.Models.NotaDetalhe> NotaDetalhe { get; set; }
     }
 }
