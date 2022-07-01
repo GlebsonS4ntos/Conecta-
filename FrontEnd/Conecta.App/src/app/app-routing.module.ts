@@ -14,9 +14,7 @@ import { QuemSomosComponent } from './Components/quem-somos/quem-somos.component
 import { MateriaProfessorTurmaComponent } from './Components/materia-professor-turma/materia-professor-turma.component';
 
 const routes: Routes = [
-  {path: 'NavBar', component:NavBarComponent, children:[
-    {path: 'NavBar/Login', component:LoginComponent}
-  ]},
+  {path: 'NavBar', component:NavBarComponent},
   {path: '', component:HomePageComponent},
   {path: 'QuemSomos', component:QuemSomosComponent},
   {path: 'NavBar/Login', component:LoginComponent},
