@@ -23,8 +23,8 @@
         <th></th>
       </tr>
     </thead>
-    <tbody *ngIf="alunos && alunosFiltrados.length">
-      <tr *ngFor="let aluno of alunosFiltrados; let i = index">
+    <tbody *ngIf="alunos && alunos.length">
+      <tr *ngFor="let aluno of alunos; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ aluno.nome }}</td>
         <td>{{ aluno.dataNasc }}</td>
@@ -33,7 +33,7 @@
         </td>
       </tr>
     </tbody>
-    <tfoot *ngIf="alunosFiltrados.length == 0">
+    <tfoot *ngIf="alunos.length == 0">
       <tr>
         <td colspan="8">
             <h4>Sem Registros</h4>

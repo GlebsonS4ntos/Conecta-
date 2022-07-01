@@ -8,4 +8,5 @@ export class Nota {
   bimestre4: number;
   ano: Date
   materiaProfessorTurmaId: number;
+  materiaProfessorTurma: materiaProfessorTurma;
 }
