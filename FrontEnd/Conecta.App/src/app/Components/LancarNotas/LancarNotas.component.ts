@@ -17,7 +17,6 @@ import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
 export class LancarNotasComponent implements OnInit {
   materiaProfessorTurmas: materiaProfessorTurma[];
   alunos: Aluno[];
-  alunosFiltrados: Aluno[];
   idTurma: number;
   private _valorSelected: materiaProfessorTurma;
   formularioNota: any = [];
@@ -29,7 +28,7 @@ export class LancarNotasComponent implements OnInit {
 
   public set valorSelected(m: materiaProfessorTurma) {
     this._valorSelected = m;
-    this.alunosFiltrados = this.valorSelected
+    this.alunos = this.valorSelected
       ? this.filtrarMaterias(this.valorSelected.turmaId.toString())
       : this.alunos;
     console.log(this.valorSelected)
@@ -63,8 +62,8 @@ export class LancarNotasComponent implements OnInit {
   }
 
   public getAlunos(): void {
-    this.alunoService.PegarTodos().subscribe((resultado) => {
-      (this.alunos = resultado), (this.alunosFiltrados = this.alunos);
+    this.alunoService.PegarTodos().subscribe((resultado:any) => {
+      (this.alunos = resultado.$values);
     });
   }
 
@@ -79,8 +78,8 @@ export class LancarNotasComponent implements OnInit {
   }
 
   public getMateriaProfessorTurmas(): void {
-    this.materiaProfessorTurmaService.PegarTodos().subscribe((resultado) => {
-      this.materiaProfessorTurmas = resultado.filter(
+    this.materiaProfessorTurmaService.PegarTodos().subscribe((resultado:any) => {
+      this.materiaProfessorTurmas = resultado.$values.filter(
         (materiaProfessorTurma: { professorId: number }) =>
           materiaProfessorTurma.professorId
             .toString()

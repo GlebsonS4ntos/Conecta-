@@ -30,7 +30,6 @@ export class MateriaProfessorTurmaComponent implements OnInit {
 
   alterarIdDeletar(id: any) {
     this.idDeletar = id;
-    console.log(this.idDeletar);
   }
 
   constructor(
@@ -47,32 +46,32 @@ export class MateriaProfessorTurmaComponent implements OnInit {
       this.formulario = this.formBuilder.group({
         //inicializando o formulario
         materiaProfessorTurmaId: new FormControl(0),
-        materiaId: new FormControl(null,[Validators.required]),
-        turmaId: new FormControl(null, [Validators.required]),
-        professorId: new FormControl(null, [Validators.required])
+        materiaId: new FormControl(0,[Validators.required]),
+        turmaId: new FormControl(0, [Validators.required]),
+        professorId: new FormControl(0, [Validators.required])
       })
   }
   public getMateriaProfessorTurmas(): void {
     this.materiaProfessorTurmaService.PegarTodos().subscribe(
-      resultado => {
-        this.materiaProfessorTurmas = resultado,
+      (resultado:any) => {
+        this.materiaProfessorTurmas = resultado.$values,
         this.materiaProfessorTurmasFiltrados = this.materiaProfessorTurmas
       }
 
     );
     this.materiaService.PegarTodos().subscribe(
-      resultado => {
-        this.materias = resultado
+      (resultado:any) => {
+        this.materias = resultado.$values
       }
     );
     this.professorService.PegarTodos().subscribe(
-      resultado => {
-        this.professores = resultado
+      (resultado:any) => {
+        this.professores = resultado.$values
       }
     );
     this.turmasService.PegarTodos().subscribe(
-      resultado => {
-        this.turmas = resultado
+      (resultado:any) => {
+        this.turmas = resultado.$values
       }
     );
   }
@@ -80,9 +79,9 @@ export class MateriaProfessorTurmaComponent implements OnInit {
     this.tituloFormulario = 'Nova MateriaProfessorTurma';
     this.formulario = new FormGroup({
       //forms controle são os inputs
-      materiaId: new FormControl(null),
-      professorId: new FormControl(null),
-      turmaId: new FormControl(null)
+      materiaId: new FormControl(0),
+      professorId: new FormControl(0),
+      turmaId: new FormControl(0)
     });
   }
   ExibirModalAtualizacao(materiaProfessorTurmaId): void {
@@ -103,15 +102,15 @@ export class MateriaProfessorTurmaComponent implements OnInit {
     if (materiaProfessorTurma.materiaProfessorTurmaId != null) {
       this.materiaProfessorTurmaService.AtualizarMateriaProfessorTurma(materiaProfessorTurma).subscribe(resultado => {
         this.toastr.warning('Atualizado com Sucesso!');
-        this.materiaProfessorTurmaService.PegarTodos().subscribe((registros) => {
-          this.materiaProfessorTurmasFiltrados = registros;
+        this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
+          this.materiaProfessorTurmasFiltrados = registros.$values;
         });
       });
     } else {
       this.materiaProfessorTurmaService.SalvarMateriaProfessorTurma(materiaProfessorTurma).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
-        this.materiaProfessorTurmaService.PegarTodos().subscribe((registros) => {
-          this.materiaProfessorTurmasFiltrados = registros;
+        this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
+          this.materiaProfessorTurmasFiltrados = registros.$values;
         });
       });
     }
@@ -120,27 +119,11 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   ExcluirMateriaProfessorTurma(deletar:number) {
     this.materiaProfessorTurmaService.ExcluirMateriaProfessorTurma(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.materiaProfessorTurmaService.PegarTodos().subscribe((registros) => {
-        this.materiaProfessorTurmasFiltrados = registros;
+      this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
+        this.materiaProfessorTurmasFiltrados = registros.$values;
       });
     });
   }
-
-  // pegarNomeMateria(id:number){
-  //   this.materiaService.PegarPeloId(id).subscribe(
-  //     resultado =>{
-  //       this.materiaRecebida = resultado.nome;
-  //     }
-  //   );
-  //   console.log(this.materiaRecebida)
-  //   return this.materiaRecebida;
-  // }
-  // pegarCodigoTurma(id:number){
-  //   this.turmasService.PegarPeloId(id)
-  // }
-  // pegarNomeProfessor(id:number){
-  //   this.professorService.PegarPeloId(id)
-  // }
 
 }
 

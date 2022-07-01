@@ -59,8 +59,8 @@ export class TurmasComponent implements OnInit {
 
   public getTurmas(): void {
     this.turmasService.PegarTodos().subscribe(
-      resultado => {
-        this.turmas = resultado,
+      (resultado : any) => {
+        this.turmas = resultado.$values,
         this.turmasFiltradas = this.turmas
       }
     );
@@ -94,15 +94,15 @@ export class TurmasComponent implements OnInit {
     if (turma.turmaId > 0) {
       this.turmasService.AtualizarTurma(turma).subscribe((resultado) => {
         this.toastr.warning('Atualizado com Sucesso!');
-        this.turmasService.PegarTodos().subscribe((registros) => {
-          this.turmasFiltradas = registros;
+        this.turmasService.PegarTodos().subscribe((registros:any) => {
+          this.turmasFiltradas = registros.$values;
         });
       });
     } else {
       this.turmasService.SalvarTurma(turma).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
-        this.turmasService.PegarTodos().subscribe((registros) => {
-          this.turmasFiltradas = registros;
+        this.turmasService.PegarTodos().subscribe((registros:any) => {
+          this.turmasFiltradas = registros.$values;
         });
       });
     }
@@ -111,8 +111,8 @@ export class TurmasComponent implements OnInit {
   ExcluirTurma(deletar: number) {
     this.turmasService.ExcluirTurma(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.turmasService.PegarTodos().subscribe((registros) => {
-        this.turmasFiltradas = registros;
+      this.turmasService.PegarTodos().subscribe((registros:any) => {
+        this.turmasFiltradas = registros.$values;
       });
     });
   }

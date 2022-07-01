@@ -1,4 +1,5 @@
 using Conecta.API.Data;
+using Conecta.API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Conecta.API
@@ -31,6 +33,7 @@ namespace Conecta.API
             services.AddDbContext<DataContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
                 ) ;
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -60,6 +63,8 @@ namespace Conecta.API
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

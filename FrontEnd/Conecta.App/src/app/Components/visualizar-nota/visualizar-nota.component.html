@@ -6,7 +6,7 @@
 
 <div class="container" style="overflow: auto;">
   <br><br><br>
-  <table class="table">
+  <table class="table" id="tabela" #tabela>
     <thead>
       <tr>
         <th scope="col">N.Materia</th>
@@ -19,7 +19,7 @@
     </thead>
     <tbody *ngIf="notas && notas.length">
       <tr *ngFor="let nota of notas">
-        <td>{{ nota.materiaProfessorTurmaId }}</td>
+        <td>{{ nota.materiaProfessorTurma.materia.nome }}</td>
         <td>{{ nota.bimestre1 }}</td>
         <td>{{ nota.bimestre2 }}</td>
         <td>{{ nota.bimestre3 }}</td>
@@ -35,4 +35,6 @@
       </tr>
     </tfoot>
   </table>
+  <br><br>
+  <a type="button" class="btn btn-outline-danger" (click)="gerarPdf()">Notas em PDF</a>
 </div>

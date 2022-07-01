@@ -14,7 +14,7 @@ import { Validators } from '@angular/forms';
 export class MateriaComponent implements OnInit {
   formulario: any = [];
   tituloFormulario: string;
-  materias: Materia[];
+  materias: any;
   materiasFiltrados: Materia[];
   private _search: string = '';
   idDeletar: number = null;
@@ -25,12 +25,12 @@ export class MateriaComponent implements OnInit {
 
   public set search(value: string) {
     this._search = value;
-    this.materiasFiltrados = this.search? this.filtrarMaterias(this.search): this.materias;
+    this.materiasFiltrados = this.search? this.filtrarMaterias(this.search): this.materias.$values;
   }
 
   filtrarMaterias(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.materias.filter(
+    return this.materias.$values.filter(
       (materia: { nome: string}) =>
         materia.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
@@ -66,7 +66,7 @@ export class MateriaComponent implements OnInit {
     this.materiaService.PegarTodos().subscribe(
       resultado => {
         this.materias = resultado,
-        this.materiasFiltrados = this.materias
+        this.materiasFiltrados = this.materias.$values
       }
     );
   }
@@ -99,15 +99,15 @@ export class MateriaComponent implements OnInit {
     if (materia.materiaId > 0) {
       this.materiaService.AtualizarMateria(materia).subscribe(resultado => {
         this.toastr.warning('Atualizado com Sucesso!');
-        this.materiaService.PegarTodos().subscribe((registros) => {
-          this.materiasFiltrados = registros;
+        this.materiaService.PegarTodos().subscribe((registros:any) => {
+          this.materiasFiltrados = registros.$values;
         });
       });
     } else {
       this.materiaService.SalvarMateria(materia).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
-        this.materiaService.PegarTodos().subscribe((registros) => {
-          this.materiasFiltrados = registros;
+        this.materiaService.PegarTodos().subscribe((registros:any) => {
+          this.materiasFiltrados = registros.$values;
         });
       });
     }
@@ -116,8 +116,8 @@ export class MateriaComponent implements OnInit {
   ExcluirMateria(deletar:number) {
     this.materiaService.ExcluirMateria(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.materiaService.PegarTodos().subscribe((registros) => {
-        this.materiasFiltrados = registros;
+      this.materiaService.PegarTodos().subscribe((registros:any) => {
+        this.materiasFiltrados = registros.$values;
       });
     });
   }

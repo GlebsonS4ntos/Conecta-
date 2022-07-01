@@ -30,6 +30,7 @@
     "hamburgers": "^1.2.1",
     "iconic": "^0.2.21",
     "jquery": "^3.6.0",
+    "jspdf": "^2.5.1",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

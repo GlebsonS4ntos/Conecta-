@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Professor } from './Professor';
 import { ProfessorService } from './professor.service';
-import { FormControl, FormGroup, FormBuilder, Validators, } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Validacoes } from '../shared/validacoes';
 
 @Component({
@@ -63,30 +68,30 @@ export class ProfessorComponent implements OnInit {
       telefone: new FormControl(null, [
         Validators.required,
         Validators.minLength(11),
-        Validators.maxLength(14)
+        Validators.maxLength(14),
       ]),
       email: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(50)
+        Validators.maxLength(50),
       ]),
       senha: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(10)
+        Validators.maxLength(10),
       ]),
       cpf: new FormControl(null, [
         Validators.required,
         Validators.minLength(14),
         Validators.maxLength(14),
-        Validacoes.isValidCpf()
+        Validacoes.isValidCpf(),
       ]),
     });
   }
 
   public getProfessores(): void {
-    this.professorService.PegarTodos().subscribe((resultado) => {
-      (this.professores = resultado),
+    this.professorService.PegarTodos().subscribe((resultado: any) => {
+      (this.professores = resultado.$values),
         (this.professoresFiltrados = this.professores);
     });
   }
@@ -116,10 +121,10 @@ export class ProfessorComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(10),
       ]),
-       cpf: new FormControl(null, [
+      cpf: new FormControl(null, [
         Validators.required,
-        Validacoes.isValidCpf(),
-      ]),
+        Validacoes.isValidCpf()
+      ])
     });
   }
   ExibirModalAtualizacao(professorId): void {
@@ -128,33 +133,12 @@ export class ProfessorComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle são os inputs
         professorId: new FormControl(resultado.professorId),
-        nome: new FormControl(resultado.nome, [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(30)
-        ]),
-        telefone: new FormControl(resultado.telefone, [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(20)
-        ]),
-        email: new FormControl(resultado.email, [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(50)
-        ]),
-        senha: new FormControl(resultado.senha, [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(10)
-        ]),
-        cpf: new FormControl(resultado.cpf, [
-          Validators.required,
-          Validators.minLength(14),
-          Validators.maxLength(14),
-          Validacoes.isValidCpf()
-        ]),
-      });
+        nome: new FormControl(resultado.nome, [Validators.required]),
+        telefone: new FormControl(resultado.telefone, [Validators.required]),
+        email: new FormControl(resultado.email, [Validators.required,Validators.email]),
+        senha: new FormControl(resultado.senha, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]),
+        cpf: new FormControl(resultado.cpf, [Validators.required, Validacoes.isValidCpf()])
+      })
     });
   }
   EnviarFormulario(): void {
@@ -166,8 +150,8 @@ export class ProfessorComponent implements OnInit {
         .AtualizarProfessor(professor)
         .subscribe((resultado) => {
           this.toastr.warning('Atualizado com Sucesso!');
-          this.professorService.PegarTodos().subscribe((registros) => {
-            this.professoresFiltrados = registros;
+          this.professorService.PegarTodos().subscribe((registros: any) => {
+            this.professoresFiltrados = registros.$values;
           });
         });
     } else {
@@ -175,8 +159,8 @@ export class ProfessorComponent implements OnInit {
         .SalvarProfessor(professor)
         .subscribe((resultado) => {
           this.toastr.success('Inserido com Sucesso!');
-          this.professorService.PegarTodos().subscribe((registros) => {
-            this.professoresFiltrados = registros;
+          this.professorService.PegarTodos().subscribe((registros: any) => {
+            this.professoresFiltrados = registros.$values;
           });
         });
     }
@@ -184,8 +168,8 @@ export class ProfessorComponent implements OnInit {
   ExcluirProfessor(deletar: number) {
     this.professorService.ExcluirProfessor(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.professorService.PegarTodos().subscribe((registros) => {
-        this.professoresFiltrados = registros;
+      this.professorService.PegarTodos().subscribe((registros: any) => {
+        this.professoresFiltrados = registros.$values;
       });
     });
   }

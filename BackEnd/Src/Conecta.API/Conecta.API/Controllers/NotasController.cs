@@ -25,7 +25,7 @@ namespace Conecta.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Nota>>> GetNota()
         {
-            return await _context.Nota.ToListAsync();
+            return await _context.Nota.Include(x => x.MateriaProfessorTurma).Include(x=>x.MateriaProfessorTurma.Materia).ToListAsync();
         }
 
         // GET: api/Notas/5

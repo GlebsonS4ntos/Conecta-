@@ -4,9 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Aluno } from './Aluno';
 import { AlunoService } from './aluno.service';
-import { FormControl, FormGroup,  Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Validacoes } from '../shared/validacoes';
-
 
 @Component({
   selector: 'app-aluno',
@@ -37,7 +36,7 @@ export class AlunoComponent implements OnInit {
   filtrarAlunos(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.alunos.filter(
-      (aluno: { nome: string, cpf : string, cidade: string}) =>
+      (aluno: { nome: string; cpf: string; cidade: string }) =>
         aluno.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
         aluno.cpf.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
         aluno.cidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1
@@ -54,78 +53,73 @@ export class AlunoComponent implements OnInit {
     private toastr: ToastrService,
     private turmasService: TurmasService
   ) {}
-  public get propriedade(){
+  public get propriedade() {
     return this.formulario.controls;
   }
 
   ngOnInit(): void {
     this.getAlunos();
-    this.turmasService.PegarTodos().subscribe(
-      resultado =>{
-      this.turmas = resultado
-      }
-    );
+    this.turmasService.PegarTodos().subscribe((resultado: any) => {
+      this.turmas = resultado.$values;
+    });
     this.formulario = new FormGroup({
       alunoId: new FormControl(0),
       nome: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       cpf: new FormControl(null, [
         Validators.required,
         Validators.minLength(14),
         Validators.maxLength(14),
-        Validacoes.isValidCpf()
+        Validacoes.isValidCpf(),
       ]),
       cep: new FormControl(null, [
         Validators.required,
         Validators.minLength(9),
-        Validators.maxLength(9)
+        Validators.maxLength(9),
       ]),
       endereco: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       bairro: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       cidade: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       dataNasc: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(15)
+        Validators.maxLength(15),
       ]),
       telefone: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
       ]),
       email: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(50)
+        Validators.email,
       ]),
       senha: new FormControl(null, [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(10)
+        Validators.maxLength(10),
       ]),
-      turmaId: new FormControl(0)
+      turmaId: new FormControl(0),
     });
   }
 
   public getAlunos(): void {
-    this.alunoService.PegarTodos().subscribe(
-      resultado => {
-        this.alunos = resultado,
-        this.alunosFiltrados = this.alunos
-      }
-    );
+    this.alunoService.PegarTodos().subscribe((resultado: any) => {
+      (this.alunos = resultado.$values), (this.alunosFiltrados = this.alunos);
+    });
   }
 
   ExibirModalCadastro(): void {
@@ -135,51 +129,51 @@ export class AlunoComponent implements OnInit {
       nome: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       cpf: new FormControl(null, [
         Validators.required,
-        Validacoes.isValidCpf()
+        Validacoes.isValidCpf(),
       ]),
       cep: new FormControl(null, [
         Validators.required,
         Validators.minLength(9),
-        Validators.maxLength(9)
+        Validators.maxLength(9),
       ]),
       endereco: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       bairro: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       cidade: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(30)
+        Validators.maxLength(30),
       ]),
       dataNasc: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(15)
+        Validators.maxLength(15),
       ]),
       telefone: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
       ]),
       email: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(50)
+        Validators.email,
       ]),
       senha: new FormControl(null, [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(10)
+        Validators.maxLength(10),
       ]),
-      turmaId: new FormControl(0)
-      });
+      turmaId: new FormControl(0),
+    });
   }
   ExibirModalAtualizacao(alunoId): void {
     this.alunoService.PegarPeloId(alunoId).subscribe((resultado) => {
@@ -187,55 +181,20 @@ export class AlunoComponent implements OnInit {
       this.formulario = new FormGroup({
         //forms controle são os inputs
         alunoId: new FormControl(resultado.alunoId),
-        nome: new FormControl(resultado.nome, [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(30)
-        ]),
-        cpf: new FormControl(resultado.cpf, [
-          Validators.required,
-          Validators.minLength(14),
-          Validators.maxLength(14),
-          Validacoes.isValidCpf()
-        ]),
-        cep: new FormControl(resultado.cep, [
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(9)
-        ]),
-        endereco: new FormControl(resultado.endereco, [
-          Validators.required,
-          Validators.maxLength(30)
-        ]),
-        bairro: new FormControl(resultado.bairro, [
-          Validators.required,
-          Validators.maxLength(30)
-        ]),
-        cidade: new FormControl(resultado.cidade, [
-          Validators.required,
-          Validators.maxLength(30)
-        ]),
-        dataNasc: new FormControl(resultado.dataNasc, [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(15)
-        ]),
-        telefone: new FormControl(resultado.telefone, [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(20)
-        ]),
+        nome: new FormControl(resultado.nome, [Validators.required]),
+        cpf: new FormControl(resultado.cpf, [Validators.required]),
+        cep: new FormControl(resultado.cep, [Validators.required]),
+        endereco: new FormControl(resultado.endereco, [Validators.required]),
+        bairro: new FormControl(resultado.bairro, [Validators.required]),
+        cidade: new FormControl(resultado.cidade, [Validators.required]),
+        dataNasc: new FormControl(resultado.dataNasc, [Validators.required]),
+        telefone: new FormControl(resultado.telefone, [Validators.required]),
         email: new FormControl(resultado.email, [
           Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(50)
+          Validators.email,
         ]),
-        senha: new FormControl(resultado.senha, [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(10)
-        ]),
-        turmaId: new FormControl(0)
+        senha: new FormControl(resultado.senha, [Validators.required]),
+        turmaId: new FormControl(resultado.turmaId),
       });
     });
   }
@@ -245,29 +204,28 @@ export class AlunoComponent implements OnInit {
     if (aluno.alunoId > 0) {
       this.alunoService.AtualizarAluno(aluno).subscribe((resultado) => {
         this.toastr.warning('Atualizado com Sucesso!');
-        this.alunoService.PegarTodos().subscribe((registros) => {
-          this.alunosFiltrados = registros;
+        this.alunoService.PegarTodos().subscribe((registros: any) => {
+          this.alunosFiltrados = registros.$values;
         });
       });
     } else {
       this.alunoService.SalvarAluno(aluno).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
-        this.alunoService.PegarTodos().subscribe((registros) => {
-          this.alunosFiltrados = registros;
+        this.alunoService.PegarTodos().subscribe((registros: any) => {
+          this.alunosFiltrados = registros.$values;
         });
       });
     }
   }
-  ExcluirAluno(deletar:number) {
+  ExcluirAluno(deletar: number) {
     this.alunoService.ExcluirAluno(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.alunoService.PegarTodos().subscribe((registros) => {
-        this.alunosFiltrados = registros;
+      this.alunoService.PegarTodos().subscribe((registros: any) => {
+        this.alunosFiltrados = registros.$values;
       });
     });
   }
 }
-function inline(arg0: { format: string; startDate: string; }) {
+function inline(arg0: { format: string; startDate: string }) {
   throw new Error('Function not implemented.');
 }
-
