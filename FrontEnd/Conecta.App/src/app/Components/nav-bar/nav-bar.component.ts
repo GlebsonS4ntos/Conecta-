@@ -1,3 +1,4 @@
+import { NavbarService } from './../shared/navbar.service';
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
@@ -9,10 +10,7 @@ import * as $ from 'jquery';
 })
 export class NavBarComponent implements OnInit {
   LogoPath = 'assets/imgs/LogoProjeto.png';
-  @Output() navbarVisible: boolean = true ;
-  visibilidadeAdm: boolean = false;
-  @Output() visibilidadeProf: boolean = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router, public navbarService: NavbarService) { }
 
   ngOnInit(): void {
     $(function(){
@@ -29,5 +27,12 @@ export class NavBarComponent implements OnInit {
   }
   login(){
     this.router.navigate(['/NavBar/Login']);
+  }
+  Sair(){
+    this.router.navigate(['']);
+    this.navbarService.visibilidadeOpcoes = true;
+    this.navbarService.visibilidadeAdm = false;
+    this.navbarService.visibilidadeAluno = false;
+    this.navbarService.visibilidadeProfessor = false;
   }
 }

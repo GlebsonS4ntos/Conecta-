@@ -1,3 +1,4 @@
+import { NavbarService } from './../shared/navbar.service';
 import { NavBarComponent } from './../nav-bar/nav-bar.component';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -30,16 +31,16 @@ export class LoginComponent implements OnInit {
   aluno: Aluno;
   adm: Adm;
   professor: Professor;
-  @Input() navbarVisible: boolean;
 
   constructor(private admService : AdmService,
     private professorService:ProfessorService,
     private alunoService:AlunoService,
     private router: Router,
-    private toastr: ToastrService ) {}
+    private toastr: ToastrService,
+    private navbarService: NavbarService ) {}
 
   ngOnInit(): void{
-    this.navbarVisible = false;
+    this.navbarService.visibilidadeNavBar = false;
   }
 
   login():void {
@@ -58,7 +59,10 @@ export class LoginComponent implements OnInit {
             this.loginLoad = true;
             this.botao = false;
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['/Aluno']);
+              this.navbarService.visibilidadeNavBar = true;
+              this.navbarService.visibilidadeAdm = true;
+              this.navbarService.visibilidadeOpcoes = false;
             }, 2000,  this.toastr.success('Logado com Sucesso'));
           }
         }
@@ -80,7 +84,10 @@ export class LoginComponent implements OnInit {
             this.loginLoad = true;
             this.botao = false;
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['/LancarNotas']);
+              this.navbarService.visibilidadeNavBar = true;
+              this.navbarService.visibilidadeProfessor = true;
+              this.navbarService.visibilidadeOpcoes = false;
             }, 2000,  this.toastr.success('Logado com Sucesso'));
           }
         }
@@ -102,7 +109,10 @@ export class LoginComponent implements OnInit {
             this.loginLoad = true;
             this.botao = false;
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['/VisualizarNota']);
+              this.navbarService.visibilidadeNavBar = true;
+              this.navbarService.visibilidadeAluno = true;
+              this.navbarService.visibilidadeOpcoes = false;
             }, 2000,  this.toastr.success('Logado com Sucesso'));
           }
         }
@@ -112,5 +122,9 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+  voltar(){
+    this.router.navigate(['']);
+    this.navbarService.visibilidadeNavBar = true;
   }
 }

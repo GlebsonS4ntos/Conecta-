@@ -1,3 +1,4 @@
+import { AdmService } from './Components/shared/adm.service';
 import { MateriaComponent } from './Components/materia/materia.component';
 import { MateriaService } from './Components/materia/materia.service';
 import { TurmasService } from './Components/turmas/turmas.service';
@@ -65,7 +66,7 @@ import { VisualizarNotaComponent } from './Components/visualizar-nota/visualizar
       }
     )
   ],
-  providers: [HttpClientModule, TurmasService, MateriaService, ProfessorService, AlunoService, MateriaProfessorTurmaService],
+  providers: [HttpClientModule, TurmasService, MateriaService, ProfessorService, AlunoService, MateriaProfessorTurmaService, AdmService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
