@@ -18,7 +18,6 @@ namespace Conecta.API.Models
         public string Email { get; set; }
         [StringLength(10)]
         public string Senha { get; set; }
-        public ICollection<Turma> Turmas { get; set; }
-        public ICollection<Materia> Materias { get; set; }
+        public ICollection<MateriaProfessorTurma> MateriaProfessorTurma { get; set; }
     }
 }

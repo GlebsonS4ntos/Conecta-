@@ -534,3 +534,6 @@ C:\Users\glebs\Desktop\Projeto2\BackEnd\Src\Conecta.API\Conecta.API\obj\Debug\ne
 C:\Users\glebs\Desktop\Projeto2\BackEnd\Src\Conecta.API\Conecta.API\obj\Debug\net5.0\Conecta.API.pdb
 C:\Users\glebs\Desktop\Projeto2\BackEnd\Src\Conecta.API\Conecta.API\obj\Debug\net5.0\Conecta.API.genruntimeconfig.cache
 C:\Users\glebs\Desktop\Projeto2\BackEnd\Src\Conecta.API\Conecta.API\obj\Debug\net5.0\ref\Conecta.API.dll
+C:\Users\glebs\Desktop\Projeto\BackEnd\Src\Conecta.API\Conecta.API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\glebs\Desktop\Projeto\BackEnd\Src\Conecta.API\Conecta.API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\glebs\Desktop\Projeto\BackEnd\Src\Conecta.API\Conecta.API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

@@ -9,7 +9,7 @@
 
   <!--Tabela de Exibicao-->
   <div style="overflow: auto;">
-    <table class="table" *ngIf="materiaProfessorTurmas">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -18,8 +18,8 @@
           <th scope="col">Professor</th>
         </tr>
       </thead>
-      <tbody *ngIf="materiaProfessorTurmas && materiaProfessorTurmasFiltrados.length">
-        <tr *ngFor="let materiaProfessorTurma of materiaProfessorTurmasFiltrados; let i = index">
+      <tbody *ngIf="materiaProfessorTurmas && materiaProfessorTurmas.length">
+        <tr *ngFor="let materiaProfessorTurma of materiaProfessorTurmas; let i = index">
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ materiaProfessorTurma.materia.nome }}</td>
           <td>{{ materiaProfessorTurma.turma.codigoTurma }}</td>
@@ -34,7 +34,7 @@
           </td>
         </tr>
       </tbody>
-      <tfoot *ngIf="materiaProfessorTurmasFiltrados.length == 0">
+      <tfoot *ngIf="materiaProfessorTurmas.length == 0">
         <tr>
           <td colspan="8">
             <h4>Sem Registros</h4>

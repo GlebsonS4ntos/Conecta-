@@ -25,7 +25,8 @@ namespace Conecta.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MateriaProfessorTurma>>> GetMateriaProfessorTurma()
         {
-            return await _context.MateriaProfessorTurma.Include(x => x.Materia).Include(x => x.Professor).Include(x => x.Turma).ToListAsync();
+            return await _context.MateriaProfessorTurma.Include(x => x.Materia).
+                Include(x => x.Professor).Include(x => x.Turma).ToListAsync();
         }
 
         // GET: api/MateriaProfessorTurmas/5

@@ -60,7 +60,7 @@ export class TurmasComponent implements OnInit {
   public getTurmas(): void {
     this.turmasService.PegarTodos().subscribe(
       (resultado : any) => {
-        this.turmas = resultado.$values,
+        this.turmas = resultado,
         this.turmasFiltradas = this.turmas
       }
     );
@@ -89,7 +89,6 @@ export class TurmasComponent implements OnInit {
   EnviarFormulario(): void {
     //criar as variaveis para ter os dados do form
     const turma: Turma = this.formulario.value;
-    console.log(turma);
 
     if (turma.turmaId > 0) {
       this.turmasService.AtualizarTurma(turma).subscribe((resultado) => {

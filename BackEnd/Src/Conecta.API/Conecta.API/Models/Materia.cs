@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Conecta.API.Models
@@ -8,7 +9,11 @@ namespace Conecta.API.Models
         public int MateriaId { get; set; }
         [StringLength(50)]
         public string Nome { get; set; }
-        public ICollection<Professor> Professores { get; set; }
-        public ICollection<Turma> Turmas { get; set; }
+        public ICollection<MateriaProfessorTurma> MateriaProfessorTurma { get; set; }
+
+        public static explicit operator Materia(MateriaProfessorTurma v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

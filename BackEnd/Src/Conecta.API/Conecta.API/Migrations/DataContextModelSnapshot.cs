@@ -224,51 +224,6 @@ namespace Conecta.API.Migrations
                     b.ToTable("Turma");
                 });
 
-            modelBuilder.Entity("MateriaProfessor", b =>
-                {
-                    b.Property<int>("MateriasMateriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfessoresProfessorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MateriasMateriaId", "ProfessoresProfessorId");
-
-                    b.HasIndex("ProfessoresProfessorId");
-
-                    b.ToTable("MateriaProfessor");
-                });
-
-            modelBuilder.Entity("MateriaTurma", b =>
-                {
-                    b.Property<int>("MateriasMateriaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TurmasTurmaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MateriasMateriaId", "TurmasTurmaId");
-
-                    b.HasIndex("TurmasTurmaId");
-
-                    b.ToTable("MateriaTurma");
-                });
-
-            modelBuilder.Entity("ProfessorTurma", b =>
-                {
-                    b.Property<int>("ProfessoresProfessorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TurmasTurmaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProfessoresProfessorId", "TurmasTurmaId");
-
-                    b.HasIndex("TurmasTurmaId");
-
-                    b.ToTable("ProfessorTurma");
-                });
-
             modelBuilder.Entity("Conecta.API.Models.Aluno", b =>
                 {
                     b.HasOne("Conecta.API.Models.Turma", "Turma")
@@ -283,19 +238,19 @@ namespace Conecta.API.Migrations
             modelBuilder.Entity("Conecta.API.Models.MateriaProfessorTurma", b =>
                 {
                     b.HasOne("Conecta.API.Models.Materia", "Materia")
-                        .WithMany()
+                        .WithMany("MateriaProfessorTurma")
                         .HasForeignKey("MateriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Conecta.API.Models.Professor", "Professor")
-                        .WithMany()
+                        .WithMany("MateriaProfessorTurma")
                         .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Conecta.API.Models.Turma", "Turma")
-                        .WithMany()
+                        .WithMany("MateriaProfessorTurma")
                         .HasForeignKey("TurmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -326,59 +281,29 @@ namespace Conecta.API.Migrations
                     b.Navigation("MateriaProfessorTurma");
                 });
 
-            modelBuilder.Entity("MateriaProfessor", b =>
-                {
-                    b.HasOne("Conecta.API.Models.Materia", null)
-                        .WithMany()
-                        .HasForeignKey("MateriasMateriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Conecta.API.Models.Professor", null)
-                        .WithMany()
-                        .HasForeignKey("ProfessoresProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MateriaTurma", b =>
-                {
-                    b.HasOne("Conecta.API.Models.Materia", null)
-                        .WithMany()
-                        .HasForeignKey("MateriasMateriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Conecta.API.Models.Turma", null)
-                        .WithMany()
-                        .HasForeignKey("TurmasTurmaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProfessorTurma", b =>
-                {
-                    b.HasOne("Conecta.API.Models.Professor", null)
-                        .WithMany()
-                        .HasForeignKey("ProfessoresProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Conecta.API.Models.Turma", null)
-                        .WithMany()
-                        .HasForeignKey("TurmasTurmaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Conecta.API.Models.Aluno", b =>
                 {
                     b.Navigation("Notas");
                 });
 
+            modelBuilder.Entity("Conecta.API.Models.Materia", b =>
+                {
+                    b.Navigation("MateriaProfessorTurma");
+                });
+
             modelBuilder.Entity("Conecta.API.Models.MateriaProfessorTurma", b =>
                 {
                     b.Navigation("Notas");
+                });
+
+            modelBuilder.Entity("Conecta.API.Models.Professor", b =>
+                {
+                    b.Navigation("MateriaProfessorTurma");
+                });
+
+            modelBuilder.Entity("Conecta.API.Models.Turma", b =>
+                {
+                    b.Navigation("MateriaProfessorTurma");
                 });
 #pragma warning restore 612, 618
         }
