@@ -90,8 +90,8 @@ export class ProfessorComponent implements OnInit {
   }
 
   public getProfessores(): void {
-    this.professorService.PegarTodos().subscribe((resultado: any) => {
-      (this.professores = resultado.$values),
+    this.professorService.PegarTodos().subscribe((resultado) => {
+      (this.professores = resultado),
         (this.professoresFiltrados = this.professores);
     });
   }
@@ -150,8 +150,8 @@ export class ProfessorComponent implements OnInit {
         .AtualizarProfessor(professor)
         .subscribe((resultado) => {
           this.toastr.warning('Atualizado com Sucesso!');
-          this.professorService.PegarTodos().subscribe((registros: any) => {
-            this.professoresFiltrados = registros.$values;
+          this.professorService.PegarTodos().subscribe((registros) => {
+            this.professoresFiltrados = registros;
           });
         });
     } else {
@@ -159,8 +159,8 @@ export class ProfessorComponent implements OnInit {
         .SalvarProfessor(professor)
         .subscribe((resultado) => {
           this.toastr.success('Inserido com Sucesso!');
-          this.professorService.PegarTodos().subscribe((registros: any) => {
-            this.professoresFiltrados = registros.$values;
+          this.professorService.PegarTodos().subscribe((registros) => {
+            this.professoresFiltrados = registros;
           });
         });
     }
@@ -168,8 +168,8 @@ export class ProfessorComponent implements OnInit {
   ExcluirProfessor(deletar: number) {
     this.professorService.ExcluirProfessor(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.professorService.PegarTodos().subscribe((registros: any) => {
-        this.professoresFiltrados = registros.$values;
+      this.professorService.PegarTodos().subscribe((registros) => {
+        this.professoresFiltrados = registros;
       });
     });
   }

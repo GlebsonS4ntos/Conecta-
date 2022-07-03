@@ -20,10 +20,12 @@ export class VisualizarNotaComponent implements OnInit {
   }
 
   public getNotas(): void {
-    this.notaService.PegarTodos().subscribe((resultado:any) => {
-      (this.notas = resultado.$values.filter((nota: { alunoId: number }) =>
-      nota.alunoId == parseInt(localStorage.getItem('idAluno')))
-      )
+    this.notaService.PegarTodos().subscribe((resultado) => {
+      (this.notas = resultado.filter((nota: { alunoId: number }) =>
+      nota.alunoId
+        .toString()
+        .indexOf(localStorage.getItem('idAluno')) !== -1
+      ))
     });
   }
   public gerarPdf(): void{

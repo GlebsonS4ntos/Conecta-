@@ -8,7 +8,6 @@ namespace Conecta.API.Models
         public int TurmaId { get; set; }
         [StringLength(10)]
         public string CodigoTurma { get; set; }
-        public ICollection<Professor> Professores { get; set; }
-        public ICollection<Materia> Materias { get; set; }
+        public ICollection<MateriaProfessorTurma> MateriaProfessorTurma { get; set; }
     }
 }

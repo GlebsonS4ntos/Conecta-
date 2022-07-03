@@ -31,7 +31,6 @@ export class LancarNotasComponent implements OnInit {
     this.alunos = this.valorSelected
       ? this.filtrarMaterias(this.valorSelected.turmaId.toString())
       : this.alunos;
-    console.log(this.valorSelected)
   }
 
   get propriedade(){
@@ -62,8 +61,8 @@ export class LancarNotasComponent implements OnInit {
   }
 
   public getAlunos(): void {
-    this.alunoService.PegarTodos().subscribe((resultado:any) => {
-      (this.alunos = resultado.$values);
+    this.alunoService.PegarTodos().subscribe((resultado) => {
+      (this.alunos = resultado);
     });
   }
 
@@ -78,8 +77,8 @@ export class LancarNotasComponent implements OnInit {
   }
 
   public getMateriaProfessorTurmas(): void {
-    this.materiaProfessorTurmaService.PegarTodos().subscribe((resultado:any) => {
-      this.materiaProfessorTurmas = resultado.$values.filter(
+    this.materiaProfessorTurmaService.PegarTodos().subscribe((resultado) => {
+      this.materiaProfessorTurmas = resultado.filter(
         (materiaProfessorTurma: { professorId: number }) =>
           materiaProfessorTurma.professorId
             .toString()
@@ -107,7 +106,6 @@ export class LancarNotasComponent implements OnInit {
   EnviarFormulario(): void {
     //criar a variavel para ter os dados do form
     const nota: Nota = this.formularioNota.value;
-    console.log(nota)
     {
       this.notaService.SalvarNota(nota).subscribe((resultado) => {
         this.toastr.success('Nota inserida com Sucesso!');

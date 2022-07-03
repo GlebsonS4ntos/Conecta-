@@ -19,7 +19,6 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   formulario: any = [];
   tituloFormulario: string;
   materiaProfessorTurmas: materiaProfessorTurma[];
-  materiaProfessorTurmasFiltrados: materiaProfessorTurma[];
   materias : Materia[];
   professores : Professor[];
   turmas: Turma[];
@@ -53,25 +52,24 @@ export class MateriaProfessorTurmaComponent implements OnInit {
   }
   public getMateriaProfessorTurmas(): void {
     this.materiaProfessorTurmaService.PegarTodos().subscribe(
-      (resultado:any) => {
-        this.materiaProfessorTurmas = resultado.$values,
-        this.materiaProfessorTurmasFiltrados = this.materiaProfessorTurmas
+      (resultado) => {
+        this.materiaProfessorTurmas = resultado
       }
 
     );
     this.materiaService.PegarTodos().subscribe(
-      (resultado:any) => {
-        this.materias = resultado.$values
+      (resultado) => {
+        this.materias = resultado
       }
     );
     this.professorService.PegarTodos().subscribe(
-      (resultado:any) => {
-        this.professores = resultado.$values
+      (resultado) => {
+        this.professores = resultado
       }
     );
     this.turmasService.PegarTodos().subscribe(
-      (resultado:any) => {
-        this.turmas = resultado.$values
+      (resultado) => {
+        this.turmas = resultado
       }
     );
   }
@@ -103,14 +101,14 @@ export class MateriaProfessorTurmaComponent implements OnInit {
       this.materiaProfessorTurmaService.AtualizarMateriaProfessorTurma(materiaProfessorTurma).subscribe(resultado => {
         this.toastr.warning('Atualizado com Sucesso!');
         this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
-          this.materiaProfessorTurmasFiltrados = registros.$values;
+          this.materiaProfessorTurmas = registros;
         });
       });
     } else {
       this.materiaProfessorTurmaService.SalvarMateriaProfessorTurma(materiaProfessorTurma).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
         this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
-          this.materiaProfessorTurmasFiltrados = registros.$values;
+          this.materiaProfessorTurmas = registros;
         });
       });
     }
@@ -120,7 +118,7 @@ export class MateriaProfessorTurmaComponent implements OnInit {
     this.materiaProfessorTurmaService.ExcluirMateriaProfessorTurma(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
       this.materiaProfessorTurmaService.PegarTodos().subscribe((registros:any) => {
-        this.materiaProfessorTurmasFiltrados = registros.$values;
+        this.materiaProfessorTurmas = registros;
       });
     });
   }

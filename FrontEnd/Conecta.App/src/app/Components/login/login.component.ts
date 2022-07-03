@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
       this.toastr.error("Preencha todos os Campos");
     }
     if(this.valorSelect == 3){
-      this.admService.PegarTodos().subscribe((data : any) => {
-        this.admLista = data.$values;
+      this.admService.PegarTodos().subscribe((data) => {
+        this.admLista = data;
         for (let i = 0; i < this.admLista.length; i++) {
           if (this.admLista[i].user.toLowerCase() == this.email.toLowerCase() &&
           this.admLista[i].password.toLocaleLowerCase() == this.password.toLocaleLowerCase()){
@@ -73,8 +73,8 @@ export class LoginComponent implements OnInit {
       });
     }
     if(this.valorSelect == 2){
-      this.professorService.PegarTodos().subscribe((data: any) => {
-        this.professorLista = data.$values;
+      this.professorService.PegarTodos().subscribe((data) => {
+        this.professorLista = data;
         for (let i = 0; i < this.professorLista.length; i++) {
           if (this.professorLista[i].email.toLowerCase() == this.email.toLowerCase() &&
           this.professorLista[i].senha.toLocaleLowerCase() == this.password.toLocaleLowerCase()){
@@ -98,8 +98,8 @@ export class LoginComponent implements OnInit {
       });
     }
     if(this.valorSelect == 1){
-      this.alunoService.PegarTodos().subscribe((data:any) => {
-        this.alunosLista = data.$values;
+      this.alunoService.PegarTodos().subscribe((data) => {
+        this.alunosLista = data;
         for (let i = 0; i < this.alunosLista.length; i++) {
           if (this.alunosLista[i].email.toLowerCase() == this.email.toLowerCase() &&
           this.alunosLista[i].senha.toLocaleLowerCase() == this.password.toLocaleLowerCase()){

@@ -59,8 +59,8 @@ export class AlunoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlunos();
-    this.turmasService.PegarTodos().subscribe((resultado: any) => {
-      this.turmas = resultado.$values;
+    this.turmasService.PegarTodos().subscribe((resultado) => {
+      this.turmas = resultado;
     });
     this.formulario = new FormGroup({
       alunoId: new FormControl(0),
@@ -118,7 +118,8 @@ export class AlunoComponent implements OnInit {
 
   public getAlunos(): void {
     this.alunoService.PegarTodos().subscribe((resultado: any) => {
-      (this.alunos = resultado.$values), (this.alunosFiltrados = this.alunos);
+      (this.alunos = resultado,
+       this.alunosFiltrados = this.alunos);
     });
   }
 
@@ -204,15 +205,15 @@ export class AlunoComponent implements OnInit {
     if (aluno.alunoId > 0) {
       this.alunoService.AtualizarAluno(aluno).subscribe((resultado) => {
         this.toastr.warning('Atualizado com Sucesso!');
-        this.alunoService.PegarTodos().subscribe((registros: any) => {
-          this.alunosFiltrados = registros.$values;
+        this.alunoService.PegarTodos().subscribe((registros) => {
+          this.alunosFiltrados = registros;
         });
       });
     } else {
       this.alunoService.SalvarAluno(aluno).subscribe((resultado) => {
         this.toastr.success('Inserido com Sucesso!');
-        this.alunoService.PegarTodos().subscribe((registros: any) => {
-          this.alunosFiltrados = registros.$values;
+        this.alunoService.PegarTodos().subscribe((registros) => {
+          this.alunosFiltrados = registros;
         });
       });
     }
@@ -220,12 +221,9 @@ export class AlunoComponent implements OnInit {
   ExcluirAluno(deletar: number) {
     this.alunoService.ExcluirAluno(deletar).subscribe((resultado) => {
       this.toastr.error('Registro deletado');
-      this.alunoService.PegarTodos().subscribe((registros: any) => {
-        this.alunosFiltrados = registros.$values;
+      this.alunoService.PegarTodos().subscribe((registros) => {
+        this.alunosFiltrados = registros;
       });
     });
   }
-}
-function inline(arg0: { format: string; startDate: string }) {
-  throw new Error('Function not implemented.');
 }
